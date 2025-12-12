@@ -1,407 +1,440 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronRight, ChevronLeft, Briefcase, Eye, Target, Users, Zap, CheckCircle, MessageSquare, Award, ArrowRight, BookOpen, Coffee, Map } from 'lucide-react';
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn 職場博弈論 | Robin Hsu</title>
+    
+    <!-- 1. 載入 Tailwind CSS (樣式) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 2. 設定網頁資訊 (SEO) -->
+    <meta name="description" content="【總監視角】從「隱形」到「被獵殺」的 2026 經營攻略">
+    <meta property="og:title" content="LinkedIn 職場博弈論 | Robin Hsu">
+    <meta property="og:description" content="解密 80% 隱藏市場：Hiring Manager 眼中的頂尖人才佈局術">
+    <style>
+        body { background-color: #111827; color: white; margin: 0; }
+        /* 自定義動畫與字體 */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap');
+        body { font-family: 'Noto Sans TC', sans-serif; }
+    </style>
 
-const SlideDeck = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [showAnswer, setShowAnswer] = useState(false);
-  const [animate, setAnimate] = useState(true);
+    <!-- 3. 載入 React 和翻譯機 (Babel) -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- 4. 載入圖示庫 (Lucide) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div id="root"></div>
 
-  // 講師資訊
-  const instructor = "Robin Hsu | 電商總監 · 人資/IT/RD副總";
+    <!-- 5. 您的 React 程式碼邏輯 -->
+    <script type="text/babel">
+        const { useState, useEffect } = React;
 
-  // 幻燈片數據
-  const slides = [
-    {
-      type: "intro",
-      title: "LinkedIn 職場博弈論",
-      subtitle: "【總監視角】從「隱形」到「被獵殺」的 2026 經營攻略",
-      content: [
-        "這不是一堂教你「填寫履歷」的操作課",
-        "這是一場關於「奪回定價權」的職場博弈",
-        "目標：讓機會主動追逐你，而非你乞求機會"
-      ],
-      icon: <Target className="w-16 h-16 text-yellow-400" />
-    },
-    {
-      type: "agenda", // 新增 Agenda 類型
-      module: "課程導航",
-      title: "今日議程 Agenda",
-      content: [
-        {
-          id: "01",
-          title: "思維重塑 (Mindset Shift)",
-          desc: "紅海 vs 藍海，為什麼 90% 的人都在做白工？"
-        },
-        {
-          id: "02",
-          title: "門面優化 (Profile Optimization)",
-          desc: "決策者視角：如何通過黃金六秒的考驗？"
-        },
-        {
-          id: "03",
-          title: "人脈佈局 (Networking Strategy)",
-          desc: "破解 80% 隱藏市場：校友、弱連結與主動出擊。"
-        },
-        {
-          id: "04",
-          title: "內功心法 (The Inner Game)",
-          desc: "頂尖人才的社交貨幣、自我投資與線下連結。"
-        }
-      ]
-    },
-    {
-      type: "concept",
-      module: "模組一：思維重塑",
-      title: "為什麼你需要 LinkedIn？",
-      question: "Q: 你認為 LinkedIn 和 104/人力銀行最大的差別是什麼？",
-      answer: "104 是「比價」的紅海 (靜態)；LinkedIn 是「價值談判」的藍海 (動態)。",
-      points: [
-        { title: "花園理論", desc: "傳統求職是打獵 (餓了才去打)；LinkedIn 是種花 (持續澆水，蝴蝶自來)。" },
-        { title: "99/1 法則", desc: "99% 的人把它當死掉的履歷；只有前 1% 的人把它當 24 小時運作的資產。" },
-        { title: "隱藏市場", desc: "80% 的好職缺從未公開，是透過「人脈」與「被搜尋」成交的。" }
-      ]
-    },
-    {
-      type: "trend",
-      module: "模組一：思維重塑",
-      title: "2026 三大關鍵趨勢",
-      content: [
-        { icon: "🎥", title: "Video First (影音優先)", desc: "演算法推崇真實感，30秒 Profile Video 是建立信任的最快方式。" },
-        { icon: "🤖", title: "AI Co-pilot (人機協作)", desc: "用 AI 寫草稿，但必須加入 Human Touch (個人觀點)，否則被降權。" },
-        { icon: "🤝", title: "Authenticity (真實性)", desc: "不要只寫 Job Description，要寫你的掙扎、失敗與成長故事。" }
-      ]
-    },
-    {
-      type: "action",
-      module: "模組二：黃金檔案優化",
-      title: "總監視角：黃金六秒法則",
-      question: "Q: 當我打開你的 Profile，我只花 6 秒決定是否聯繫。我看哪裡？",
-      answer: "照片(信任感) + Headline(關鍵字) + 最近一份工作(相關性)。",
-      actionItem: {
-        title: "Headline 優化公式",
-        code: "[專業角色] + [幫助誰/產業] + [具體成果/解決痛點]",
-        example: "❌ Senior Engineer\n✅ Senior Backend Dev | Helping FinTech Scale to 1M Users | Python & Go Expert"
-      }
-    },
-    {
-      type: "deep-dive",
-      module: "模組二：黃金檔案優化",
-      title: "關於我 (About) 的寫作策略",
-      subtitle: "針對 Hiring Manager 的痛苦寫作",
-      content: [
-        "不要寫：我是誰，我做了什麼 (Me focused)",
-        "要寫：我能解決誰的痛苦 (Value focused)",
-        "技巧：埋入 JD (Job Description) 關鍵字以利 SEO",
-        "結構：Hook (鉤子) → Story (職涯故事) → Achievement (量化數據) → CTA (聯絡我)"
-      ]
-    },
-    {
-      type: "strategy",
-      module: "模組三：人脈與求職",
-      title: "主動出擊的連結策略",
-      question: "Q: 申請工作後，除了等待，你還能做什麼？",
-      answer: "啟動「3 人法則」：連結招聘主管、團隊成員、HR。",
-      points: [
-        { title: "校友搜尋大法", desc: "利用 Alumni Tool 找出在目標公司的學長姐，這是最容易的切入點。" },
-        { title: "The Note (個人化邀請)", desc: "絕不發送空白邀請。說明「你是誰」+「為何連結」。" },
-        { title: "資訊型面談 (Coffee Chat)", desc: "不求職，只求指點。問：「該行業面臨的最大挑戰？」機會自然會來。" }
-      ]
-    },
-    {
-      type: "advanced",
-      module: "模組四：內功心法",
-      title: "Top Voice 與社交貨幣",
-      subtitle: "如何不寫長文也能獲得高流量？",
-      content: [
-        "留言矩陣：每天 15 分鐘，去同領域專家的文章下留「高價值觀點」。",
-        "成就他人 (Champion Others)：轉發並讚美他人的成就，是獲取好感的最快捷徑。",
-        "弱連結 (Weak Ties)：真正的轉職機會，通常來自那些「這兩年只見過一次面」的朋友。"
-      ]
-    },
-    {
-      type: "strategy",
-      module: "模組四：內功心法",
-      title: "頂尖人才的自我修煉",
-      question: "Q: 如何確保持續輸出高品質的內容與氣場？",
-      answer: "線上影響力，源自於線下的「高品質輸入」與「有效社交」。",
-      points: [
-        { 
-          title: "極致的自我投資 (Input)", 
-          desc: "「所有茶水間的八卦，我都不感興趣。」\n過濾雜訊，專注於攝取相關領域的新聞與新知。你的輸入品質，決定了你的身價。" 
-        },
-        { 
-          title: "走出去 (Effective Networking)", 
-          desc: "LinkedIn 是放大器，不是製造機。\n多參加實體活動與論壇，面對面淬煉出「有效社交」，再將這些強連結帶回線上經營。" 
-        }
-      ]
-    },
-    {
-      type: "checklist",
-      module: "結語：學員行動清單",
-      title: "立即行動：打造你的數位資產",
-      checklist: [
-        "Profile 體檢：Headline 套用公式，照片去背專業化",
-        "開啟 Creator Mode：優化個人檔案佈局，展示 Talks about",
-        "社交投資：每天 15 分鐘，對 3 篇貼文進行高價值留言",
-        "自我精進：關注產業新知，拒絕無效的茶水間八卦",
-        "人脈連結：每週參加一場活動或發出 5 個附帶 Note 的邀請"
-      ]
-    }
-  ];
+        // 圖示組件封裝 (因為在純 HTML 中使用 Lucide 需要轉換)
+        const Icon = ({ name, className }) => {
+            useEffect(() => {
+                lucide.createIcons();
+            }, [name]);
+            return <i data-lucide={name} className={className}></i>;
+        };
 
-  const totalSlides = slides.length;
+        const SlideDeck = () => {
+            const [currentSlide, setCurrentSlide] = useState(0);
+            const [showAnswer, setShowAnswer] = useState(false);
+            const [animate, setAnimate] = useState(true);
 
-  const nextSlide = () => {
-    if (currentSlide < totalSlides - 1) {
-      setAnimate(false);
-      setTimeout(() => {
-        setCurrentSlide(currentSlide + 1);
-        setShowAnswer(false);
-        setAnimate(true);
-      }, 300);
-    }
-  };
+            // 講師資訊
+            const instructor = "Robin Hsu | 電商總監 · 人資/IT/RD副總";
 
-  const prevSlide = () => {
-    if (currentSlide > 0) {
-      setAnimate(false);
-      setTimeout(() => {
-        setCurrentSlide(currentSlide - 1);
-        setShowAnswer(false);
-        setAnimate(true);
-      }, 300);
-    }
-  };
-
-  // 鍵盤控制
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'ArrowRight') nextSlide();
-      if (e.key === 'ArrowLeft') prevSlide();
-      if (e.key === ' ' || e.key === 'Enter') setShowAnswer(!showAnswer);
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentSlide, showAnswer]);
-
-  const renderContent = (slide) => {
-    switch (slide.type) {
-      case "intro":
-        return (
-          <div className="flex flex-col items-center justify-center h-full text-center space-y-8 p-8">
-            <div className="animate-bounce">{slide.icon}</div>
-            <h1 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-100">
-              {slide.title}
-            </h1>
-            <h2 className="text-2xl text-gray-300 font-light max-w-3xl">
-              {slide.subtitle}
-            </h2>
-            <div className="w-24 h-1 bg-yellow-500 rounded-full my-6"></div>
-            <div className="space-y-4 text-left">
-              {slide.content.map((item, idx) => (
-                <div key={idx} className="flex items-center space-x-3 text-xl text-gray-200">
-                  <CheckCircle className="text-yellow-500 w-6 h-6 flex-shrink-0" />
-                  <span>{item}</span>
-                </div>
-              ))}
-            </div>
-            <div className="mt-12 text-gray-400 text-sm">{instructor}</div>
-            <button 
-              onClick={nextSlide}
-              className="mt-8 px-8 py-3 bg-yellow-600 hover:bg-yellow-500 text-black font-bold rounded-full transition-all transform hover:scale-105 flex items-center"
-            >
-              開始解密 <ArrowRight className="ml-2 w-5 h-5" />
-            </button>
-          </div>
-        );
-
-      case "agenda":
-        return (
-          <div className="h-full flex flex-col p-8">
-            <div className="text-yellow-500 text-sm font-semibold tracking-widest uppercase mb-2">{slide.module}</div>
-            <h2 className="text-4xl font-bold text-white mb-8">{slide.title}</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow items-center">
-              {slide.content.map((item, idx) => (
-                <div key={idx} className="bg-gray-800 p-6 rounded-xl border border-gray-700 hover:border-yellow-500 transition-all group h-full flex flex-col justify-center">
-                  <div className="text-5xl font-bold text-gray-700 group-hover:text-yellow-500 mb-2 transition-colors">
-                    {item.id}
-                  </div>
-                  <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        );
-
-      case "concept":
-      case "action":
-      case "strategy":
-        return (
-          <div className="h-full flex flex-col p-8">
-            <div className="text-yellow-500 text-sm font-semibold tracking-widest uppercase mb-2">{slide.module}</div>
-            <h2 className="text-4xl font-bold text-white mb-8">{slide.title}</h2>
-            
-            {/* Question Card */}
-            <div className="bg-gray-800 rounded-xl p-6 mb-6 border-l-4 border-yellow-500 shadow-lg cursor-pointer transition-all hover:bg-gray-750" onClick={() => setShowAnswer(!showAnswer)}>
-              <div className="flex items-start">
-                <div className="bg-yellow-900/50 p-2 rounded-lg mr-4 text-yellow-400 font-bold">Q</div>
-                <h3 className="text-xl text-gray-100 font-medium">{slide.question}</h3>
-              </div>
-              {showAnswer ? (
-                <div className="mt-4 pt-4 border-t border-gray-700 animate-fadeIn">
-                  <p className="text-yellow-400 text-xl font-bold">{slide.answer}</p>
-                </div>
-              ) : (
-                <div className="mt-4 text-gray-500 text-sm flex items-center">
-                  <Zap className="w-4 h-4 mr-2" /> 點擊揭曉總監視角
-                </div>
-              )}
-            </div>
-
-            {/* Content Points */}
-            <div className="grid gap-6 flex-grow overflow-y-auto">
-              {slide.points && slide.points.map((point, idx) => (
-                <div key={idx} className="flex items-start bg-gray-900/50 p-4 rounded-lg">
-                  <div className="w-8 h-8 rounded-full bg-blue-900 flex items-center justify-center text-blue-300 font-bold mr-4 flex-shrink-0">{idx + 1}</div>
-                  <div>
-                    <h4 className="text-lg font-bold text-white mb-1">{point.title}</h4>
-                    <p className="text-gray-400 text-sm leading-relaxed whitespace-pre-wrap">{point.desc}</p>
-                  </div>
-                </div>
-              ))}
-
-              {slide.actionItem && (
-                <div className="bg-blue-900/30 border border-blue-500/30 p-6 rounded-xl mt-4">
-                  <h4 className="text-blue-400 font-bold mb-3 flex items-center"><Target className="w-5 h-5 mr-2"/> {slide.actionItem.title}</h4>
-                  <div className="bg-black p-4 rounded font-mono text-green-400 text-sm mb-3">
-                    {slide.actionItem.code}
-                  </div>
-                  <div className="text-gray-300 text-sm whitespace-pre-wrap">
-                    {slide.actionItem.example}
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        );
-
-      case "trend":
-      case "deep-dive":
-      case "advanced":
-        return (
-          <div className="h-full flex flex-col p-8">
-            <div className="text-yellow-500 text-sm font-semibold tracking-widest uppercase mb-2">{slide.module}</div>
-            <h2 className="text-4xl font-bold text-white mb-2">{slide.title}</h2>
-            {slide.subtitle && <p className="text-xl text-gray-400 mb-8 font-light italic">{slide.subtitle}</p>}
-            
-            <div className="grid gap-6 overflow-y-auto">
-              {slide.content.map((item, idx) => {
-                if (typeof item === 'string') {
-                   return (
-                    <div key={idx} className="flex items-center space-x-4 bg-gray-800 p-4 rounded-lg border border-gray-700">
-                      <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                      <span className="text-lg text-gray-200">{item}</span>
-                    </div>
-                   )
+            // 幻燈片數據 (2026版 + 99/1法則)
+            const slides = [
+                {
+                    type: "intro",
+                    title: "LinkedIn 職場博弈論",
+                    subtitle: "【總監視角】從「隱形」到「被獵殺」的 2026 經營攻略",
+                    content: [
+                        "這不是一堂教你「填寫履歷」的操作課",
+                        "這是一場關於「奪回定價權」的職場博弈",
+                        "目標：讓機會主動追逐你，而非你乞求機會"
+                    ],
+                    icon: "target"
+                },
+                {
+                    type: "agenda",
+                    module: "課程導航",
+                    title: "今日議程 Agenda",
+                    content: [
+                        { id: "01", title: "思維重塑 (Mindset Shift)", desc: "紅海 vs 藍海，為什麼 99% 的人都在做白工？" },
+                        { id: "02", title: "門面優化 (Profile Optimization)", desc: "決策者視角：如何通過黃金六秒的考驗？" },
+                        { id: "03", title: "人脈佈局 (Networking Strategy)", desc: "破解 80% 隱藏市場：校友、弱連結與主動出擊。" },
+                        { id: "04", title: "內功心法 (The Inner Game)", desc: "頂尖人才的社交貨幣、自我投資與線下連結。" }
+                    ]
+                },
+                {
+                    type: "concept",
+                    module: "模組一：思維重塑",
+                    title: "為什麼你需要 LinkedIn？",
+                    question: "Q: 你認為 LinkedIn 和 104/人力銀行最大的差別是什麼？",
+                    answer: "104 是「比價」的紅海 (靜態)；LinkedIn 是「價值談判」的藍海 (動態)。",
+                    points: [
+                        { title: "花園理論", desc: "傳統求職是打獵 (餓了才去打)；LinkedIn 是種花 (持續澆水，蝴蝶自來)。" },
+                        { title: "99/1 法則", desc: "99% 的人把它當死掉的履歷 (分母)；只有前 1% 的人把它當 24 小時運作的資產 (分子)。" },
+                        { title: "隱藏市場", desc: "80% 的好職缺從未公開，是透過「人脈」與「被搜尋」成交的。" }
+                    ]
+                },
+                {
+                    type: "trend",
+                    module: "模組一：思維重塑",
+                    title: "2026 三大關鍵趨勢",
+                    content: [
+                        { icon: "video", title: "Video First (影音優先)", desc: "演算法推崇真實感，30秒 Profile Video 是建立信任的最快方式。" },
+                        { icon: "bot", title: "AI Co-pilot (人機協作)", desc: "用 AI 寫草稿，但必須加入 Human Touch (個人觀點)，否則被降權。" },
+                        { icon: "heart-handshake", title: "Authenticity (真實性)", desc: "不要只寫 Job Description，要寫你的掙扎、失敗與成長故事。" }
+                    ]
+                },
+                {
+                    type: "action",
+                    module: "模組二：黃金檔案優化",
+                    title: "總監視角：黃金六秒法則",
+                    question: "Q: 當我打開你的 Profile，我只花 6 秒決定是否聯繫。我看哪裡？",
+                    answer: "照片(信任感) + Headline(關鍵字) + 最近一份工作(相關性)。",
+                    actionItem: {
+                        title: "Headline 優化公式",
+                        code: "[專業角色] + [幫助誰/產業] + [具體成果/解決痛點]",
+                        example: "❌ Senior Engineer\n✅ Senior Backend Dev | Helping FinTech Scale to 1M Users | Python & Go Expert"
+                    }
+                },
+                {
+                    type: "deep-dive",
+                    module: "模組二：黃金檔案優化",
+                    title: "關於我 (About) 的寫作策略",
+                    subtitle: "針對 Hiring Manager 的痛苦寫作",
+                    content: [
+                        "不要寫：我是誰，我做了什麼 (Me focused)",
+                        "要寫：我能解決誰的痛苦 (Value focused)",
+                        "技巧：埋入 JD (Job Description) 關鍵字以利 SEO",
+                        "結構：Hook (鉤子) → Story (職涯故事) → Achievement (量化數據) → CTA (聯絡我)"
+                    ]
+                },
+                {
+                    type: "strategy",
+                    module: "模組三：人脈與求職",
+                    title: "主動出擊的連結策略",
+                    question: "Q: 申請工作後，除了等待，你還能做什麼？",
+                    answer: "啟動「3 人法則」：連結招聘主管、團隊成員、HR。",
+                    points: [
+                        { title: "校友搜尋大法", desc: "利用 Alumni Tool 找出在目標公司的學長姐，這是最容易的切入點。" },
+                        { title: "The Note (個人化邀請)", desc: "絕不發送空白邀請。說明「你是誰」+「為何連結」。" },
+                        { title: "資訊型面談 (Coffee Chat)", desc: "不求職，只求指點。問：「該行業面臨的最大挑戰？」機會自然會來。" }
+                    ]
+                },
+                {
+                    type: "advanced",
+                    module: "模組四：內功心法",
+                    title: "Top Voice 與社交貨幣",
+                    subtitle: "如何不寫長文也能獲得高流量？",
+                    content: [
+                        "留言矩陣：每天 15 分鐘，去同領域專家的文章下留「高價值觀點」。",
+                        "成就他人 (Champion Others)：轉發並讚美他人的成就，是獲取好感的最快捷徑。",
+                        "弱連結 (Weak Ties)：真正的轉職機會，通常來自那些「這兩年只見過一次面」的朋友。"
+                    ]
+                },
+                {
+                    type: "strategy",
+                    module: "模組四：內功心法",
+                    title: "頂尖人才的自我修煉",
+                    question: "Q: 如何確保持續輸出高品質的內容與氣場？",
+                    answer: "線上影響力，源自於線下的「高品質輸入」與「有效社交」。",
+                    points: [
+                        { 
+                        title: "極致的自我投資 (Input)", 
+                        desc: "「所有茶水間的八卦，我都不感興趣。」\n過濾雜訊，專注於攝取相關領域的新聞與新知。你的輸入品質，決定了你的身價。" 
+                        },
+                        { 
+                        title: "走出去 (Effective Networking)", 
+                        desc: "LinkedIn 是放大器，不是製造機。\n多參加實體活動與論壇，面對面淬煉出「有效社交」，再將這些強連結帶回線上經營。" 
+                        }
+                    ]
+                },
+                {
+                    type: "checklist",
+                    module: "結語：學員行動清單",
+                    title: "立即行動：打造你的數位資產",
+                    checklist: [
+                        "Profile 體檢：Headline 套用公式，照片去背專業化",
+                        "開啟 Creator Mode：優化個人檔案佈局，展示 Talks about",
+                        "社交投資：每天 15 分鐘，對 3 篇貼文進行高價值留言",
+                        "自我精進：關注產業新知，拒絕無效的茶水間八卦",
+                        "人脈連結：每週參加一場活動或發出 5 個附帶 Note 的邀請"
+                    ]
                 }
-                return (
-                  <div key={idx} className="bg-gray-800 p-6 rounded-xl border-l-4 border-blue-500 flex items-start space-x-4 transition hover:transform hover:-translate-y-1">
-                    <div className="text-3xl">{item.icon}</div>
-                    <div>
-                      <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
-                      <p className="text-gray-400 leading-relaxed">{item.desc}</p>
+            ];
+
+            const totalSlides = slides.length;
+
+            const nextSlide = () => {
+                if (currentSlide < totalSlides - 1) {
+                    setAnimate(false);
+                    setTimeout(() => {
+                        setCurrentSlide(currentSlide + 1);
+                        setShowAnswer(false);
+                        setAnimate(true);
+                    }, 300);
+                }
+            };
+
+            const prevSlide = () => {
+                if (currentSlide > 0) {
+                    setAnimate(false);
+                    setTimeout(() => {
+                        setCurrentSlide(currentSlide - 1);
+                        setShowAnswer(false);
+                        setAnimate(true);
+                    }, 300);
+                }
+            };
+
+            useEffect(() => {
+                const handleKeyDown = (e) => {
+                    if (e.key === 'ArrowRight') nextSlide();
+                    if (e.key === 'ArrowLeft') prevSlide();
+                    if (e.key === ' ' || e.key === 'Enter') setShowAnswer(!showAnswer);
+                };
+                window.addEventListener('keydown', handleKeyDown);
+                return () => window.removeEventListener('keydown', handleKeyDown);
+            }, [currentSlide, showAnswer]);
+
+            // 確保每次渲染後更新圖示
+            useEffect(() => {
+                lucide.createIcons();
+            });
+
+            const renderContent = (slide) => {
+                switch (slide.type) {
+                    case "intro":
+                        return (
+                            <div className="flex flex-col items-center justify-center h-full text-center space-y-8 p-8">
+                                <div className="animate-bounce"><Icon name={slide.icon} className="w-16 h-16 text-yellow-400" /></div>
+                                <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-100">
+                                    {slide.title}
+                                </h1>
+                                <h2 className="text-xl md:text-2xl text-gray-300 font-light max-w-3xl">
+                                    {slide.subtitle}
+                                </h2>
+                                <div className="w-24 h-1 bg-yellow-500 rounded-full my-6"></div>
+                                <div className="space-y-4 text-left">
+                                    {slide.content.map((item, idx) => (
+                                        <div key={idx} className="flex items-center space-x-3 text-lg md:text-xl text-gray-200">
+                                            <Icon name="check-circle" className="text-yellow-500 w-6 h-6 flex-shrink-0" />
+                                            <span>{item}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="mt-12 text-gray-400 text-sm">{instructor}</div>
+                                <button 
+                                    onClick={nextSlide}
+                                    className="mt-8 px-8 py-3 bg-yellow-600 hover:bg-yellow-500 text-black font-bold rounded-full transition-all transform hover:scale-105 flex items-center"
+                                >
+                                    開始解密 <Icon name="arrow-right" className="ml-2 w-5 h-5" />
+                                </button>
+                            </div>
+                        );
+
+                    case "agenda":
+                        return (
+                            <div className="h-full flex flex-col p-8">
+                                <div className="text-yellow-500 text-sm font-semibold tracking-widest uppercase mb-2">{slide.module}</div>
+                                <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">{slide.title}</h2>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow items-center">
+                                    {slide.content.map((item, idx) => (
+                                        <div key={idx} className="bg-gray-800 p-6 rounded-xl border border-gray-700 hover:border-yellow-500 transition-all group h-full flex flex-col justify-center">
+                                            <div className="text-5xl font-bold text-gray-700 group-hover:text-yellow-500 mb-2 transition-colors">
+                                                {item.id}
+                                            </div>
+                                            <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
+                                            <p className="text-gray-400 text-sm leading-relaxed">
+                                                {item.desc}
+                                            </p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        );
+
+                    case "concept":
+                    case "action":
+                    case "strategy":
+                        return (
+                            <div className="h-full flex flex-col p-8">
+                                <div className="text-yellow-500 text-sm font-semibold tracking-widest uppercase mb-2">{slide.module}</div>
+                                <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">{slide.title}</h2>
+                                
+                                {/* Question Card */}
+                                <div className="bg-gray-800 rounded-xl p-6 mb-6 border-l-4 border-yellow-500 shadow-lg cursor-pointer transition-all hover:bg-gray-750" onClick={() => setShowAnswer(!showAnswer)}>
+                                    <div className="flex items-start">
+                                        <div className="bg-yellow-900/50 p-2 rounded-lg mr-4 text-yellow-400 font-bold">Q</div>
+                                        <h3 className="text-lg md:text-xl text-gray-100 font-medium">{slide.question}</h3>
+                                    </div>
+                                    {showAnswer ? (
+                                        <div className="mt-4 pt-4 border-t border-gray-700 animate-fadeIn">
+                                            <p className="text-yellow-400 text-xl font-bold">{slide.answer}</p>
+                                        </div>
+                                    ) : (
+                                        <div className="mt-4 text-gray-500 text-sm flex items-center">
+                                            <Icon name="zap" className="w-4 h-4 mr-2" /> 點擊揭曉總監視角
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* Content Points */}
+                                <div className="grid gap-6 flex-grow overflow-y-auto">
+                                    {slide.points && slide.points.map((point, idx) => (
+                                        <div key={idx} className="flex items-start bg-gray-900/50 p-4 rounded-lg">
+                                            <div className="w-8 h-8 rounded-full bg-blue-900 flex items-center justify-center text-blue-300 font-bold mr-4 flex-shrink-0">{idx + 1}</div>
+                                            <div>
+                                                <h4 className="text-lg font-bold text-white mb-1">{point.title}</h4>
+                                                <p className="text-gray-400 text-sm leading-relaxed whitespace-pre-wrap">{point.desc}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+
+                                    {slide.actionItem && (
+                                        <div className="bg-blue-900/30 border border-blue-500/30 p-6 rounded-xl mt-4">
+                                            <h4 className="text-blue-400 font-bold mb-3 flex items-center"><Icon name="target" className="w-5 h-5 mr-2"/> {slide.actionItem.title}</h4>
+                                            <div className="bg-black p-4 rounded font-mono text-green-400 text-sm mb-3">
+                                                {slide.actionItem.code}
+                                            </div>
+                                            <div className="text-gray-300 text-sm whitespace-pre-wrap">
+                                                {slide.actionItem.example}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        );
+
+                    case "trend":
+                    case "deep-dive":
+                    case "advanced":
+                        return (
+                            <div className="h-full flex flex-col p-8">
+                                <div className="text-yellow-500 text-sm font-semibold tracking-widest uppercase mb-2">{slide.module}</div>
+                                <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">{slide.title}</h2>
+                                {slide.subtitle && <p className="text-xl text-gray-400 mb-8 font-light italic">{slide.subtitle}</p>}
+                                
+                                <div className="grid gap-6 overflow-y-auto">
+                                    {slide.content.map((item, idx) => {
+                                        if (typeof item === 'string') {
+                                        return (
+                                            <div key={idx} className="flex items-center space-x-4 bg-gray-800 p-4 rounded-lg border border-gray-700">
+                                            <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                                            <span className="text-lg text-gray-200">{item}</span>
+                                            </div>
+                                        )
+                                        }
+                                        return (
+                                        <div key={idx} className="bg-gray-800 p-6 rounded-xl border-l-4 border-blue-500 flex items-start space-x-4 transition hover:transform hover:-translate-y-1">
+                                            <div className="text-3xl"><Icon name={item.icon} className="w-8 h-8"/></div>
+                                            <div>
+                                            <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
+                                            <p className="text-gray-400 leading-relaxed">{item.desc}</p>
+                                            </div>
+                                        </div>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+                        );
+
+                    case "checklist":
+                        return (
+                            <div className="h-full flex flex-col p-8 items-center justify-center">
+                                <div className="text-center mb-8">
+                                    <Icon name="award" className="w-20 h-20 text-yellow-500 mx-auto mb-4" />
+                                    <h2 className="text-4xl font-bold text-white mb-2">{slide.title}</h2>
+                                    <p className="text-gray-400">每天進步 1%，一年後你會感謝現在的自己</p>
+                                </div>
+                                
+                                <div className="w-full max-w-2xl bg-gray-800 rounded-2xl p-8 shadow-2xl border border-gray-700">
+                                    <div className="space-y-4">
+                                        {slide.checklist.map((item, idx) => (
+                                            <div key={idx} className="flex items-center space-x-4 group">
+                                                <div className="w-6 h-6 rounded-full border-2 border-gray-500 group-hover:border-yellow-500 group-hover:bg-yellow-500 transition-all flex items-center justify-center">
+                                                    <Icon name="check-circle" className="w-4 h-4 text-black opacity-0 group-hover:opacity-100" />
+                                                </div>
+                                                <span className="text-lg text-gray-300 group-hover:text-white transition-colors">{item}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                                
+                                <div className="mt-12 flex space-x-4">
+                                    <button onClick={() => setCurrentSlide(0)} className="px-6 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-white text-sm">
+                                        重新播放
+                                    </button>
+                                </div>
+                            </div>
+                        );
+                    
+                    default:
+                        return <div>Unknown Slide Type</div>;
+                }
+            };
+
+            return (
+                <div className="min-h-screen bg-gray-900 text-gray-100 font-sans flex items-center justify-center p-4">
+                    <div className="w-full max-w-5xl aspect-video bg-gradient-to-br from-gray-900 to-black rounded-2xl shadow-2xl border border-gray-800 overflow-hidden flex flex-col relative">
+                        
+                        {/* Progress Bar */}
+                        <div className="w-full h-1 bg-gray-800">
+                            <div 
+                                className="h-full bg-gradient-to-r from-yellow-600 to-yellow-400 transition-all duration-500"
+                                style={{ width: `${((currentSlide + 1) / totalSlides) * 100}%` }}
+                            ></div>
+                        </div>
+
+                        {/* Main Content Area */}
+                        <div className={`flex-grow relative overflow-hidden transition-opacity duration-300 ${animate ? 'opacity-100' : 'opacity-0'}`}>
+                            {renderContent(slides[currentSlide])}
+                        </div>
+
+                        {/* Navigation Bar */}
+                        <div className="bg-gray-900 border-t border-gray-800 p-4 flex justify-between items-center z-10">
+                            <div className="flex items-center text-gray-500 text-sm space-x-4">
+                                <span className="font-bold text-yellow-600">ROBIN HSU</span>
+                                <span className="hidden md:inline">|</span>
+                                <span className="hidden md:inline text-xs">{currentSlide + 1} / {totalSlides}</span>
+                            </div>
+
+                            <div className="flex space-x-2">
+                                <button 
+                                    onClick={prevSlide}
+                                    disabled={currentSlide === 0}
+                                    className={`p-2 rounded-full ${currentSlide === 0 ? 'text-gray-700 cursor-not-allowed' : 'text-gray-300 hover:bg-gray-800 hover:text-white'}`}
+                                >
+                                    <Icon name="chevron-left" className="w-6 h-6" />
+                                </button>
+                                <button 
+                                    onClick={nextSlide}
+                                    disabled={currentSlide === totalSlides - 1}
+                                    className={`p-2 rounded-full ${currentSlide === totalSlides - 1 ? 'text-gray-700 cursor-not-allowed' : 'text-yellow-500 hover:bg-yellow-900/20'}`}
+                                >
+                                    <Icon name="chevron-right" className="w-6 h-6" />
+                                </button>
+                            </div>
+                        </div>
+
                     </div>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-        );
+                </div>
+            );
+        };
 
-      case "checklist":
-        return (
-          <div className="h-full flex flex-col p-8 items-center justify-center">
-            <div className="text-center mb-8">
-              <Award className="w-20 h-20 text-yellow-500 mx-auto mb-4" />
-              <h2 className="text-4xl font-bold text-white mb-2">{slide.title}</h2>
-              <p className="text-gray-400">每天進步 1%，一年後你會感謝現在的自己</p>
-            </div>
-            
-            <div className="w-full max-w-2xl bg-gray-800 rounded-2xl p-8 shadow-2xl border border-gray-700">
-              <div className="space-y-4">
-                {slide.checklist.map((item, idx) => (
-                  <div key={idx} className="flex items-center space-x-4 group">
-                    <div className="w-6 h-6 rounded-full border-2 border-gray-500 group-hover:border-yellow-500 group-hover:bg-yellow-500 transition-all flex items-center justify-center">
-                      <CheckCircle className="w-4 h-4 text-black opacity-0 group-hover:opacity-100" />
-                    </div>
-                    <span className="text-lg text-gray-300 group-hover:text-white transition-colors">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            <div className="mt-12 flex space-x-4">
-              <button onClick={() => setCurrentSlide(0)} className="px-6 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-white text-sm">
-                重新播放
-              </button>
-            </div>
-          </div>
-        );
-      
-      default:
-        return <div>Unknown Slide Type</div>;
-    }
-  };
-
-  return (
-    <div className="min-h-screen bg-gray-900 text-gray-100 font-sans flex items-center justify-center p-4">
-      <div className="w-full max-w-5xl aspect-video bg-gradient-to-br from-gray-900 to-black rounded-2xl shadow-2xl border border-gray-800 overflow-hidden flex flex-col relative">
-        
-        {/* Progress Bar */}
-        <div className="w-full h-1 bg-gray-800">
-          <div 
-            className="h-full bg-gradient-to-r from-yellow-600 to-yellow-400 transition-all duration-500"
-            style={{ width: `${((currentSlide + 1) / totalSlides) * 100}%` }}
-          ></div>
-        </div>
-
-        {/* Main Content Area */}
-        <div className={`flex-grow relative overflow-hidden transition-opacity duration-300 ${animate ? 'opacity-100' : 'opacity-0'}`}>
-          {renderContent(slides[currentSlide])}
-        </div>
-
-        {/* Navigation Bar */}
-        <div className="bg-gray-900 border-t border-gray-800 p-4 flex justify-between items-center z-10">
-          <div className="flex items-center text-gray-500 text-sm space-x-4">
-            <span className="font-bold text-yellow-600">ROBIN HSU</span>
-            <span className="hidden md:inline">|</span>
-            <span className="hidden md:inline text-xs">{currentSlide + 1} / {totalSlides}</span>
-          </div>
-
-          <div className="flex space-x-2">
-            <button 
-              onClick={prevSlide}
-              disabled={currentSlide === 0}
-              className={`p-2 rounded-full ${currentSlide === 0 ? 'text-gray-700 cursor-not-allowed' : 'text-gray-300 hover:bg-gray-800 hover:text-white'}`}
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-            <button 
-              onClick={nextSlide}
-              disabled={currentSlide === totalSlides - 1}
-              className={`p-2 rounded-full ${currentSlide === totalSlides - 1 ? 'text-gray-700 cursor-not-allowed' : 'text-yellow-500 hover:bg-yellow-900/20'}`}
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  );
-};
-
-export default SlideDeck;
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<SlideDeck />);
+    </script>
+</body>
+</html>
