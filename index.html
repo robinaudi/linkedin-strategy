@@ -22,8 +22,17 @@
         /* 動態背景過渡效果 */
         body { margin: 0; transition: background-color 0.5s ease; }
         .slide-container { transition: all 0.5s ease; }
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
         body { font-family: 'Noto Sans TC', sans-serif; }
+        
+        /* 隱藏滾動條但保留功能 (美觀) */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 </head>
 <body>
@@ -45,7 +54,8 @@
             HeartHandshake: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08v0c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.15-.26c.8.4 1.25 1.25 1.74 2.05"/></svg>,
             Award: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>,
             Sun: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2"/><path d="M12 21v2"/><path d="M4.22 4.22l1.42 1.42"/><path d="M18.36 18.36l1.42 1.42"/><path d="M1 12h2"/><path d="M21 12h2"/><path d="M4.22 19.78l1.42-1.42"/><path d="M18.36 5.64l1.42-1.42"/></svg>,
-            Moon: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            Moon: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>,
+            Type: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
         };
 
         // --- 主題設定 ---
@@ -56,8 +66,8 @@
                 cardBg: "bg-gray-800",
                 cardBorder: "border-gray-700 hover:border-yellow-500",
                 text: "text-white",
-                subText: "text-gray-400",
-                accent: "text-yellow-500", // 重點色：金
+                subText: "text-gray-300",
+                accent: "text-yellow-500",
                 accentBg: "bg-yellow-500",
                 buttonBg: "bg-yellow-600 hover:bg-yellow-500",
                 buttonText: "text-black",
@@ -79,8 +89,8 @@
                 cardBg: "bg-white",
                 cardBorder: "border-gray-200 hover:border-blue-600 shadow-sm hover:shadow-md",
                 text: "text-gray-900",
-                subText: "text-gray-600",
-                accent: "text-blue-700", // 重點色：LinkedIn 藍
+                subText: "text-gray-700",
+                accent: "text-blue-700",
                 accentBg: "bg-blue-700",
                 buttonBg: "bg-blue-700 hover:bg-blue-600",
                 buttonText: "text-white",
@@ -98,15 +108,54 @@
             }
         };
 
+        // --- 字體大小設定 (可擴充) ---
+        const fontSizes = {
+            normal: {
+                base: "text-xl",      // 內容文字
+                lg: "text-2xl",       // 重點文字
+                xl: "text-3xl",       // 小標題
+                title: "text-5xl",    // 主標題
+                code: "text-base",
+                icon: "w-6 h-6",
+                nav: "text-sm"
+            },
+            large: {
+                base: "text-2xl",
+                lg: "text-3xl",
+                xl: "text-4xl",
+                title: "text-6xl",
+                code: "text-lg",
+                icon: "w-8 h-8",
+                nav: "text-base"
+            },
+            xl: {
+                base: "text-3xl",
+                lg: "text-4xl",
+                xl: "text-5xl",
+                title: "text-7xl",
+                code: "text-xl",
+                icon: "w-10 h-10",
+                nav: "text-lg"
+            }
+        };
+
         const SlideDeck = () => {
             const [currentSlide, setCurrentSlide] = useState(0);
             const [showAnswer, setShowAnswer] = useState(false);
             const [animate, setAnimate] = useState(true);
-            const [isDarkMode, setIsDarkMode] = useState(true); // 預設深色模式
+            const [isDarkMode, setIsDarkMode] = useState(true); 
+            const [fontSizeLevel, setFontSizeLevel] = useState('normal'); // normal, large, xl
 
             const theme = isDarkMode ? themes.dark : themes.light;
+            const fonts = fontSizes[fontSizeLevel];
 
             const instructor = "Robin Hsu |  電商總監 · ex.CIO · ex.人資副總";
+
+            const toggleFontSize = () => {
+                if (fontSizeLevel === 'normal') setFontSizeLevel('large');
+                else if (fontSizeLevel === 'large') setFontSizeLevel('xl');
+                else setFontSizeLevel('normal');
+            };
 
             const slides = [
                 {
@@ -115,9 +164,9 @@
                     subtitle: "履歷被看見！透過 LinkedIn 打造你的數位花園",
                     content: [
                         "思維重塑：為什麼你不需要投履歷",
-                        "門面優化：決策者視角---黃金六秒關鍵",
-                        "人脈佈局 : 主動出擊、善用弱連結",
-                        "內功心法 ：自我投資、長期佈局、有效社交"
+                        "門面優化：決策者視角 — 黃金六秒關鍵",
+                        "人脈佈局：主動出擊、善用弱連結",
+                        "內功心法：自我投資、長期佈局、有效社交"
                     ],
                     Icon: Icons.Target
                 },
@@ -281,46 +330,46 @@
                         return (
                             <div className="flex flex-col items-center justify-center h-full text-center space-y-8 p-8">
                                 <div className="animate-bounce">
-                                    {SlideIcon && <SlideIcon className={`w-16 h-16 ${theme.accent}`} />}
+                                    {SlideIcon && <SlideIcon className={`w-20 h-20 ${theme.accent}`} />}
                                 </div>
-                                <h1 className={`text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r ${theme.titleGradient}`}>
+                                <h1 className={`${fonts.title} font-bold bg-clip-text text-transparent bg-gradient-to-r ${theme.titleGradient} leading-tight`}>
                                     {slide.title}
                                 </h1>
-                                <h2 className={`text-xl md:text-2xl ${theme.subText} font-light max-w-3xl`}>
+                                <h2 className={`${fonts.xl} ${theme.subText} font-light max-w-4xl leading-relaxed`}>
                                     {slide.subtitle}
                                 </h2>
-                                <div className={`w-24 h-1 ${theme.accentBg} rounded-full my-6`}></div>
-                                <div className="space-y-4 text-left">
+                                <div className={`w-32 h-2 ${theme.accentBg} rounded-full my-6`}></div>
+                                <div className="space-y-6 text-left w-full max-w-4xl mx-auto">
                                     {slide.content.map((item, idx) => (
-                                        <div key={idx} className={`flex items-center space-x-3 text-lg md:text-xl ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`}>
-                                            <Icons.CheckCircle className={`${theme.accent} w-6 h-6 flex-shrink-0`} />
+                                        <div key={idx} className={`flex items-start space-x-4 ${fonts.base} ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`}>
+                                            <Icons.CheckCircle className={`${theme.accent} ${fonts.icon} flex-shrink-0 mt-1`} />
                                             <span>{item}</span>
                                         </div>
                                     ))}
                                 </div>
-                                <div className="mt-12 text-gray-500 text-sm">{instructor}</div>
+                                <div className={`mt-16 ${fonts.base} ${theme.subText}`}>{instructor}</div>
                                 <button 
                                     onClick={nextSlide}
-                                    className={`mt-8 px-8 py-3 ${theme.buttonBg} ${theme.buttonText} font-bold rounded-full transition-all transform hover:scale-105 flex items-center shadow-lg`}
+                                    className={`mt-12 px-10 py-4 ${theme.buttonBg} ${theme.buttonText} ${fonts.lg} font-bold rounded-full transition-all transform hover:scale-105 flex items-center shadow-lg`}
                                 >
-                                    開始解密 <Icons.ArrowRight className="ml-2 w-5 h-5" />
+                                    開始解密 <Icons.ArrowRight className={`ml-3 ${fonts.icon}`} />
                                 </button>
                             </div>
                         );
 
                     case "agenda":
                         return (
-                            <div className="h-full flex flex-col p-8">
-                                <div className={`${theme.accent} text-sm font-semibold tracking-widest uppercase mb-2`}>{slide.module}</div>
-                                <h2 className={`text-3xl md:text-4xl font-bold ${theme.text} mb-8`}>{slide.title}</h2>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow items-center">
+                            <div className="h-full flex flex-col p-8 md:p-12">
+                                <div className={`${theme.accent} ${fonts.nav} font-semibold tracking-widest uppercase mb-4`}>{slide.module}</div>
+                                <h2 className={`${fonts.title} font-bold ${theme.text} mb-10`}>{slide.title}</h2>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 flex-grow items-center overflow-y-auto no-scrollbar">
                                     {slide.content.map((item, idx) => (
-                                        <div key={idx} className={`${theme.cardBg} p-6 rounded-xl border ${theme.cardBorder} transition-all group h-full flex flex-col justify-center`}>
-                                            <div className={`text-5xl font-bold text-gray-400 group-hover:${theme.accent} mb-2 transition-colors`}>
+                                        <div key={idx} className={`${theme.cardBg} p-8 rounded-2xl border ${theme.cardBorder} transition-all group h-full flex flex-col justify-center`}>
+                                            <div className={`text-6xl font-bold text-gray-400 group-hover:${theme.accent} mb-4 transition-colors`}>
                                                 {item.id}
                                             </div>
-                                            <h3 className={`text-xl font-bold ${theme.text} mb-2`}>{item.title}</h3>
-                                            <p className={`${theme.subText} text-sm leading-relaxed`}>
+                                            <h3 className={`${fonts.lg} font-bold ${theme.text} mb-3`}>{item.title}</h3>
+                                            <p className={`${theme.subText} ${fonts.base} leading-relaxed`}>
                                                 {item.desc}
                                             </p>
                                         </div>
@@ -333,46 +382,46 @@
                     case "action":
                     case "strategy":
                         return (
-                            <div className="h-full flex flex-col p-8">
-                                <div className={`${theme.accent} text-sm font-semibold tracking-widest uppercase mb-2`}>{slide.module}</div>
-                                <h2 className={`text-3xl md:text-4xl font-bold ${theme.text} mb-8`}>{slide.title}</h2>
+                            <div className="h-full flex flex-col p-8 md:p-12">
+                                <div className={`${theme.accent} ${fonts.nav} font-semibold tracking-widest uppercase mb-4`}>{slide.module}</div>
+                                <h2 className={`${fonts.title} font-bold ${theme.text} mb-8`}>{slide.title}</h2>
                                 
                                 {/* Question Card */}
-                                <div className={`${theme.qCard} rounded-xl p-6 mb-6 border-l-4 shadow-lg cursor-pointer transition-all`} onClick={() => setShowAnswer(!showAnswer)}>
+                                <div className={`${theme.qCard} rounded-2xl p-8 mb-8 border-l-8 shadow-lg cursor-pointer transition-all hover:translate-x-2`} onClick={() => setShowAnswer(!showAnswer)}>
                                     <div className="flex items-start">
-                                        <div className={`${isDarkMode ? 'bg-yellow-900/50 text-yellow-400' : 'bg-blue-50 text-blue-700'} p-2 rounded-lg mr-4 font-bold`}>Q</div>
-                                        <h3 className={`text-lg md:text-xl ${theme.text} font-medium`}>{slide.question}</h3>
+                                        <div className={`${isDarkMode ? 'bg-yellow-900/50 text-yellow-400' : 'bg-blue-50 text-blue-700'} p-3 rounded-xl mr-6 font-bold ${fonts.lg}`}>Q</div>
+                                        <h3 className={`${fonts.lg} ${theme.text} font-medium leading-relaxed`}>{slide.question}</h3>
                                     </div>
                                     {showAnswer ? (
-                                        <div className={`mt-4 pt-4 border-t ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} animate-fadeIn`}>
-                                            <p className={`${theme.accent} text-xl font-bold`}>{slide.answer}</p>
+                                        <div className={`mt-6 pt-6 border-t ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} animate-fadeIn`}>
+                                            <p className={`${theme.accent} ${fonts.xl} font-bold leading-relaxed`}>{slide.answer}</p>
                                         </div>
                                     ) : (
-                                        <div className={`mt-4 ${theme.subText} text-sm flex items-center`}>
-                                            <Icons.Zap className="w-4 h-4 mr-2" /> 點擊揭曉決策視角
+                                        <div className={`mt-6 ${theme.subText} ${fonts.base} flex items-center`}>
+                                            <Icons.Zap className={`${fonts.icon} mr-2`} /> 點擊揭曉觀點
                                         </div>
                                     )}
                                 </div>
 
                                 {/* Content Points */}
-                                <div className="grid gap-6 flex-grow overflow-y-auto">
+                                <div className="grid gap-6 flex-grow overflow-y-auto no-scrollbar">
                                     {slide.points && slide.points.map((point, idx) => (
-                                        <div key={idx} className={`flex items-start ${isDarkMode ? 'bg-gray-900/50' : 'bg-gray-50'} p-4 rounded-lg`}>
-                                            <div className={`w-8 h-8 rounded-full ${theme.numberBg} flex items-center justify-center font-bold mr-4 flex-shrink-0`}>{idx + 1}</div>
-                                            <div>
-                                                <h4 className={`text-lg font-bold ${theme.text} mb-1`}>{point.title}</h4>
-                                                <p className={`${theme.subText} text-sm leading-relaxed whitespace-pre-wrap`}>{point.desc}</p>
+                                        <div key={idx} className={`flex items-start ${isDarkMode ? 'bg-gray-900/50' : 'bg-gray-50'} p-6 rounded-xl`}>
+                                            <div className={`w-10 h-10 rounded-full ${theme.numberBg} flex items-center justify-center font-bold mr-6 flex-shrink-0 text-xl`}>{idx + 1}</div>
+                                            <div className="flex-1">
+                                                <h4 className={`${fonts.lg} font-bold ${theme.text} mb-2`}>{point.title}</h4>
+                                                <p className={`${theme.subText} ${fonts.base} leading-relaxed whitespace-pre-wrap`}>{point.desc}</p>
                                             </div>
                                         </div>
                                     ))}
 
                                     {slide.actionItem && (
-                                        <div className={`${theme.codeBoxBorder} border p-6 rounded-xl mt-4`}>
-                                            <h4 className={`${theme.accent} font-bold mb-3 flex items-center`}><Icons.Target className="w-5 h-5 mr-2"/> {slide.actionItem.title}</h4>
-                                            <div className={`${theme.codeBg} p-4 rounded font-mono text-sm mb-3`}>
+                                        <div className={`${theme.codeBoxBorder} border p-8 rounded-2xl mt-4`}>
+                                            <h4 className={`${theme.accent} ${fonts.lg} font-bold mb-4 flex items-center`}><Icons.Target className={`${fonts.icon} mr-3`}/> {slide.actionItem.title}</h4>
+                                            <div className={`${theme.codeBg} p-6 rounded-xl font-mono ${fonts.code} mb-4 overflow-x-auto`}>
                                                 {slide.actionItem.code}
                                             </div>
-                                            <div className={`${theme.subText} text-sm whitespace-pre-wrap`}>
+                                            <div className={`${theme.subText} ${fonts.base} whitespace-pre-wrap`}>
                                                 {slide.actionItem.example}
                                             </div>
                                         </div>
@@ -385,30 +434,30 @@
                     case "deep-dive":
                     case "advanced":
                         return (
-                            <div className="h-full flex flex-col p-8">
-                                <div className={`${theme.accent} text-sm font-semibold tracking-widest uppercase mb-2`}>{slide.module}</div>
-                                <h2 className={`text-3xl md:text-4xl font-bold ${theme.text} mb-2`}>{slide.title}</h2>
-                                {slide.subtitle && <p className={`text-xl ${theme.subText} mb-8 font-light italic`}>{slide.subtitle}</p>}
+                            <div className="h-full flex flex-col p-8 md:p-12">
+                                <div className={`${theme.accent} ${fonts.nav} font-semibold tracking-widest uppercase mb-4`}>{slide.module}</div>
+                                <h2 className={`${fonts.title} font-bold ${theme.text} mb-4`}>{slide.title}</h2>
+                                {slide.subtitle && <p className={`${fonts.xl} ${theme.subText} mb-10 font-light italic leading-relaxed`}>{slide.subtitle}</p>}
                                 
-                                <div className="grid gap-6 overflow-y-auto">
+                                <div className="grid gap-8 overflow-y-auto no-scrollbar">
                                     {slide.content.map((item, idx) => {
                                         const ItemIcon = item.Icon;
                                         if (typeof item === 'string') {
                                             return (
-                                                <div key={idx} className={`flex items-center space-x-4 ${theme.cardBg} p-4 rounded-lg border ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-                                                    <div className={`w-2 h-2 ${theme.accentBg} rounded-full`}></div>
-                                                    <span className={`text-lg ${theme.text}`}>{item}</span>
+                                                <div key={idx} className={`flex items-start space-x-6 ${theme.cardBg} p-6 rounded-2xl border ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+                                                    <div className={`w-3 h-3 ${theme.accentBg} rounded-full mt-3 flex-shrink-0`}></div>
+                                                    <span className={`${fonts.base} ${theme.text} leading-relaxed`}>{item}</span>
                                                 </div>
                                             )
                                         }
                                         return (
-                                            <div key={idx} className={`${theme.cardBg} p-6 rounded-xl border-l-4 ${isDarkMode ? 'border-blue-500' : 'border-blue-600'} shadow-sm flex items-start space-x-4 transition hover:transform hover:-translate-y-1`}>
-                                                <div className={`text-3xl ${theme.text}`}>
-                                                    {ItemIcon && <ItemIcon className="w-8 h-8" />}
+                                            <div key={idx} className={`${theme.cardBg} p-8 rounded-2xl border-l-8 ${isDarkMode ? 'border-blue-500' : 'border-blue-600'} shadow-sm flex items-start space-x-6 transition hover:transform hover:-translate-y-1`}>
+                                                <div className={`${theme.text} mt-1`}>
+                                                    {ItemIcon && <ItemIcon className="w-12 h-12" />}
                                                 </div>
                                                 <div>
-                                                    <h3 className={`text-xl font-bold ${theme.text} mb-2`}>{item.title}</h3>
-                                                    <p className={`${theme.subText} leading-relaxed`}>{item.desc}</p>
+                                                    <h3 className={`${fonts.lg} font-bold ${theme.text} mb-3`}>{item.title}</h3>
+                                                    <p className={`${theme.subText} ${fonts.base} leading-relaxed`}>{item.desc}</p>
                                                 </div>
                                             </div>
                                         )
@@ -419,28 +468,28 @@
 
                     case "checklist":
                         return (
-                            <div className="h-full flex flex-col p-8 items-center justify-center">
-                                <div className="text-center mb-8">
-                                    <Icons.Award className={`w-20 h-20 ${theme.accent} mx-auto mb-4`} />
-                                    <h2 className={`text-4xl font-bold ${theme.text} mb-2`}>{slide.title}</h2>
-                                    <p className={theme.subText}>每天多比別人走一步，看似不起眼的足跡，將會不斷累積為成功的機率。</p>
+                            <div className="h-full flex flex-col p-8 md:p-12 items-center justify-center">
+                                <div className="text-center mb-12">
+                                    <Icons.Award className={`w-24 h-24 ${theme.accent} mx-auto mb-6`} />
+                                    <h2 className={`${fonts.title} font-bold ${theme.text} mb-4`}>{slide.title}</h2>
+                                    <p className={`${theme.subText} ${fonts.xl}`}>每天進步 1%，一年後你會感謝現在的自己</p>
                                 </div>
                                 
-                                <div className={`w-full max-w-2xl ${theme.cardBg} rounded-2xl p-8 shadow-2xl border ${isDarkMode ? 'border-gray-700' : 'border-gray-100'}`}>
-                                    <div className="space-y-4">
+                                <div className={`w-full max-w-4xl ${theme.cardBg} rounded-3xl p-10 shadow-2xl border ${isDarkMode ? 'border-gray-700' : 'border-gray-100'}`}>
+                                    <div className="space-y-6">
                                         {slide.checklist.map((item, idx) => (
-                                            <div key={idx} className="flex items-center space-x-4 group">
-                                                <div className={`w-6 h-6 rounded-full border-2 ${theme.checkIconBg} transition-all flex items-center justify-center`}>
-                                                    <Icons.CheckCircle className={`w-4 h-4 ${theme.checkIconColor} opacity-0 group-hover:opacity-100`} />
+                                            <div key={idx} className="flex items-start space-x-6 group">
+                                                <div className={`w-8 h-8 rounded-full border-2 ${theme.checkIconBg} transition-all flex items-center justify-center flex-shrink-0 mt-1`}>
+                                                    <Icons.CheckCircle className={`w-5 h-5 ${theme.checkIconColor} opacity-0 group-hover:opacity-100`} />
                                                 </div>
-                                                <span className={`text-lg ${isDarkMode ? 'text-gray-300 group-hover:text-white' : 'text-gray-700 group-hover:text-blue-800'} transition-colors`}>{item}</span>
+                                                <span className={`${fonts.base} ${isDarkMode ? 'text-gray-300 group-hover:text-white' : 'text-gray-700 group-hover:text-blue-800'} transition-colors leading-relaxed`}>{item}</span>
                                             </div>
                                         ))}
                                     </div>
                                 </div>
                                 
-                                <div className="mt-12 flex space-x-4">
-                                    <button onClick={() => setCurrentSlide(0)} className={`px-6 py-2 ${isDarkMode ? 'bg-gray-700 hover:bg-gray-600 text-white' : 'bg-gray-200 hover:bg-gray-300 text-gray-800'} rounded-lg text-sm`}>
+                                <div className="mt-16 flex space-x-6">
+                                    <button onClick={() => setCurrentSlide(0)} className={`px-8 py-3 ${isDarkMode ? 'bg-gray-700 hover:bg-gray-600 text-white' : 'bg-gray-200 hover:bg-gray-300 text-gray-800'} rounded-xl ${fonts.nav}`}>
                                         重新播放
                                     </button>
                                 </div>
@@ -453,14 +502,21 @@
             };
 
             return (
-                <div className={`min-h-screen ${theme.bg} ${theme.text} font-sans flex items-center justify-center p-4 transition-colors duration-500`}>
-                    <div className={`w-full max-w-5xl min-h-[700px] ${theme.containerBg} rounded-2xl shadow-2xl border ${isDarkMode ? 'border-gray-800' : 'border-gray-200'} overflow-hidden flex flex-col relative`}>
+                <div className={`min-h-screen ${theme.bg} ${theme.text} font-sans flex items-center justify-center p-2 md:p-6 transition-colors duration-500`}>
+                    <div className={`w-full max-w-[1400px] min-h-[800px] ${theme.containerBg} rounded-3xl shadow-2xl border ${isDarkMode ? 'border-gray-800' : 'border-gray-200'} overflow-hidden flex flex-col relative`}>
                         
-                        {/* Theme Toggle Button (右上角) */}
-                        <div className="absolute top-4 right-4 z-20">
+                        {/* Control Buttons (右上角) */}
+                        <div className="absolute top-6 right-6 z-20 flex space-x-3">
+                            <button 
+                                onClick={toggleFontSize}
+                                className={`p-3 rounded-full ${isDarkMode ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'} transition-all`}
+                                title="調整字體大小"
+                            >
+                                <Icons.Type className="w-6 h-6" />
+                            </button>
                             <button 
                                 onClick={() => setIsDarkMode(!isDarkMode)}
-                                className={`p-2 rounded-full ${isDarkMode ? 'bg-gray-800 text-yellow-400 hover:bg-gray-700' : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'} transition-all`}
+                                className={`p-3 rounded-full ${isDarkMode ? 'bg-gray-800 text-yellow-400 hover:bg-gray-700' : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'} transition-all`}
                                 title={isDarkMode ? "切換至淺色模式" : "切換至深色模式"}
                             >
                                 {isDarkMode ? <Icons.Sun className="w-6 h-6" /> : <Icons.Moon className="w-6 h-6" />}
@@ -468,7 +524,7 @@
                         </div>
 
                         {/* Progress Bar */}
-                        <div className={`w-full h-1 ${isDarkMode ? 'bg-gray-800' : 'bg-gray-200'} flex-shrink-0`}>
+                        <div className={`w-full h-2 ${isDarkMode ? 'bg-gray-800' : 'bg-gray-200'} flex-shrink-0`}>
                             <div 
                                 className={`h-full bg-gradient-to-r ${theme.progressBar} transition-all duration-500`}
                                 style={{ width: `${((currentSlide + 1) / totalSlides) * 100}%` }}
@@ -481,27 +537,27 @@
                         </div>
 
                         {/* Navigation Bar */}
-                        <div className={`${theme.navBg} border-t ${theme.navBorder} p-4 flex justify-between items-center z-10 flex-shrink-0`}>
-                            <div className={`flex items-center ${theme.navText} text-sm space-x-4`}>
+                        <div className={`${theme.navBg} border-t ${theme.navBorder} p-6 flex justify-between items-center z-10 flex-shrink-0`}>
+                            <div className={`flex items-center ${theme.navText} ${fonts.nav} space-x-6`}>
                                 <span className={`font-bold ${theme.accent}`}>ROBIN HSU</span>
                                 <span className="hidden md:inline">|</span>
-                                <span className="hidden md:inline text-xs">{currentSlide + 1} / {totalSlides}</span>
+                                <span className="hidden md:inline">{currentSlide + 1} / {totalSlides}</span>
                             </div>
 
-                            <div className="flex space-x-2">
+                            <div className="flex space-x-4">
                                 <button 
                                     onClick={prevSlide}
                                     disabled={currentSlide === 0}
-                                    className={`p-2 rounded-full ${currentSlide === 0 ? 'text-gray-400 cursor-not-allowed' : `${theme.text} hover:${isDarkMode ? 'bg-gray-800' : 'bg-gray-100'}`}`}
+                                    className={`p-3 rounded-full ${currentSlide === 0 ? 'text-gray-600 cursor-not-allowed' : `${theme.text} hover:${isDarkMode ? 'bg-gray-800' : 'bg-gray-100'}`}`}
                                 >
-                                    <Icons.ChevronLeft className="w-6 h-6" />
+                                    <Icons.ChevronLeft className="w-8 h-8" />
                                 </button>
                                 <button 
                                     onClick={nextSlide}
                                     disabled={currentSlide === totalSlides - 1}
-                                    className={`p-2 rounded-full ${currentSlide === totalSlides - 1 ? 'text-gray-400 cursor-not-allowed' : `${theme.accent} hover:${isDarkMode ? 'bg-yellow-900/20' : 'bg-blue-50'}`}`}
+                                    className={`p-3 rounded-full ${currentSlide === totalSlides - 1 ? 'text-gray-600 cursor-not-allowed' : `${theme.accent} hover:${isDarkMode ? 'bg-yellow-900/20' : 'bg-blue-50'}`}`}
                                 >
-                                    <Icons.ChevronRight className="w-6 h-6" />
+                                    <Icons.ChevronRight className="w-8 h-8" />
                                 </button>
                             </div>
                         </div>
