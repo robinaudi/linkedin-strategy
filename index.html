@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 LinkedIn 經營攻略 | Robin Hsu</title>
+    <title>2026 LinkedIn 經營攻略 ｜ Robin Hsu</title>
     
     <!-- 1. 載入 Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- 2. 設定 SEO -->
-    <meta name="description" content="「求職超順利：透過 LinkedIn 打造你的數位資產」">
-    <meta property="og:title" content="2026 LinkedIn 經營攻略| Robin Hsu">
+    <meta name="description" content="2026 LinkedIn 經營攻略">
+    <meta property="og:title" content="2026 LinkedIn 經營攻略 | Robin Hsu">
     <meta property="og:description" content="解密 80% 隱藏市場：Hiring Manager 眼中的頂尖人才佈局術">
     
     <!-- 3. 載入 React 核心 -->
@@ -30,7 +30,7 @@
     <script type="text/babel">
         const { useState, useEffect } = React;
 
-        // --- 核心修復：手刻 SVG 圖示元件，杜絕 DOM 衝突 ---
+        // --- 手刻 SVG 圖示元件 (穩定版) ---
         const Icons = {
             Target: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>,
             ChevronLeft: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>,
@@ -49,24 +49,25 @@
             const [showAnswer, setShowAnswer] = useState(false);
             const [animate, setAnimate] = useState(true);
 
-            const instructor = "Robin Hsu | 電商總監 · 人資/IT/RD副總";
+            const instructor = "Robin Hsu |  電商總監 · CIO · 人資副總";
 
             const slides = [
                 {
                     type: "intro",
-                    title: "LinkedIn 職場博弈論",
+                    title: "2026 LinkedIn 經營攻略",
                     subtitle: "【總監視角】從「隱形」到「被獵殺」的 2026 經營攻略",
                     content: [
-                        "這不是一堂教你「填寫履歷」的操作課",
-                        "這是一場關於「奪回定價權」的職場博弈",
-                        "目標：讓機會主動追逐你，而非你乞求機會"
+                        "思維重塑：為什麼你不需要投履歷",
+                        "門面優化 ：決策者視角----黃金六秒關鍵",
+                        "人脈佈局 : 主動出擊、善用弱連結",
+                        "內功心法 ：自我投資、長期佈局、有效社交"
                     ],
                     Icon: Icons.Target
                 },
                 {
                     type: "agenda",
                     module: "課程導航",
-                    title: "今日議程 Agenda",
+                    title: "Agenda",
                     content: [
                         { id: "01", title: "思維重塑 (Mindset Shift)", desc: "紅海 vs 藍海，為什麼 99% 的人都在做白工？" },
                         { id: "02", title: "門面優化 (Profile Optimization)", desc: "決策者視角：如何通過黃金六秒的考驗？" },
@@ -81,9 +82,9 @@
                     question: "Q: 你認為 LinkedIn 和 104/人力銀行最大的差別是什麼？",
                     answer: "104 是「比價」的紅海 (靜態)；LinkedIn 是「價值談判」的藍海 (動態)。",
                     points: [
-                        { title: "花園理論", desc: "傳統求職是打獵 (餓了才去打)；LinkedIn 是種花 (持續澆水，蝴蝶自來)。" },
-                        { title: "99/1 法則", desc: "99% 的人把它當死掉的履歷 (分母)；只有前 1% 的人把它當 24 小時運作的資產 (分子)。" },
-                        { title: "隱藏市場", desc: "80% 的好職缺從未公開，是透過「人脈」與「被搜尋」成交的。" }
+                        { title: "花園理論", desc: "傳統求職是打獵 (餓了才去狩獵)；LinkedIn 是經營花園 (持續幫植物澆水，蝴蝶自來)。" },
+                        { title: "99/1 法則", desc: "99% 的人把它當作是靜態的履歷；只有前 1% 的人把它當 24 小時曝光的品牌。" },
+                        { title: "隱藏市場", desc: "80% 的好職缺從未公開，是透過「人脈」、「被(獵頭)搜尋」成交的。" }
                     ]
                 },
                 {
@@ -139,8 +140,8 @@
                     subtitle: "如何不寫長文也能獲得高流量？",
                     content: [
                         "留言矩陣：每天 15 分鐘，去同領域專家的文章下留「高價值觀點」。",
-                        "成就他人 (Champion Others)：轉發並讚美他人的成就，是獲取好感的最快捷徑。",
-                        "弱連結 (Weak Ties)：真正的轉職機會，通常來自那些「這兩年只見過一次面」的朋友。"
+                        "成就他人：轉發並讚美他人的成就，是獲取好感的最快捷徑。",
+                        "弱連結：真正的轉職機會，通常來自那些「這兩年只見過一次面」、「LinkedIn上互動過」的朋友。"
                     ]
                 },
                 {
@@ -148,11 +149,11 @@
                     module: "模組四：內功心法",
                     title: "頂尖人才的自我修煉",
                     question: "Q: 如何確保持續輸出高品質的內容與氣場？",
-                    answer: "線上影響力，源自於線下的「高品質輸入」與「有效社交」。",
+                    answer: "線上影響力，源自於線下的「高品質輸出」與「有效社交」。",
                     points: [
                         { 
                         title: "極致的自我投資 (Input)", 
-                        desc: "「所有茶水間的八卦，我都不感興趣。」\n過濾雜訊，專注於攝取相關領域的新聞與新知。你的輸入品質，決定了你的身價。" 
+                        desc: "「所有茶水間的八卦，我都不感興趣。」\n過濾雜訊，專注於攝取相關領域的新聞與新知。你的輸出品質，決定了你的身價。" 
                         },
                         { 
                         title: "走出去 (Effective Networking)", 
@@ -166,10 +167,10 @@
                     title: "立即行動：打造你的數位資產",
                     checklist: [
                         "Profile 體檢：Headline 套用公式，照片去背專業化",
-                        "開啟 Creator Mode：優化個人檔案佈局，展示 Talks about",
-                        "社交投資：每天 15 分鐘，對 3 篇貼文進行高價值留言",
-                        "自我精進：關注產業新知，拒絕無效的茶水間八卦",
-                        "人脈連結：每週參加一場活動或發出 5 個附帶 Note 的邀請"
+                        "自我投資：發表文章洞悉、活動心得、考照成就、優化個人檔案佈局",
+                        "社交投資：每天 15 分鐘，留言 x 1 篇 + 邀請 x 10",
+                        "自我精進：關注產業新知，少滑短影音，少看李雅英",
+                        "人脈連結：每月參加一場活動或發出 5 個附帶 Note 的邀請"
                     ]
                 }
             ];
@@ -390,10 +391,11 @@
 
             return (
                 <div className="min-h-screen bg-gray-900 text-gray-100 font-sans flex items-center justify-center p-4">
-                    <div className="w-full max-w-5xl aspect-video bg-gradient-to-br from-gray-900 to-black rounded-2xl shadow-2xl border border-gray-800 overflow-hidden flex flex-col relative">
+                    {/* 修改：移除 aspect-video，改用 min-h-[700px] 以增加高度 */}
+                    <div className="w-full max-w-5xl min-h-[700px] bg-gradient-to-br from-gray-900 to-black rounded-2xl shadow-2xl border border-gray-800 overflow-hidden flex flex-col relative">
                         
                         {/* Progress Bar */}
-                        <div className="w-full h-1 bg-gray-800">
+                        <div className="w-full h-1 bg-gray-800 flex-shrink-0">
                             <div 
                                 className="h-full bg-gradient-to-r from-yellow-600 to-yellow-400 transition-all duration-500"
                                 style={{ width: `${((currentSlide + 1) / totalSlides) * 100}%` }}
@@ -406,7 +408,7 @@
                         </div>
 
                         {/* Navigation Bar */}
-                        <div className="bg-gray-900 border-t border-gray-800 p-4 flex justify-between items-center z-10">
+                        <div className="bg-gray-900 border-t border-gray-800 p-4 flex justify-between items-center z-10 flex-shrink-0">
                             <div className="flex items-center text-gray-500 text-sm space-x-4">
                                 <span className="font-bold text-yellow-600">ROBIN HSU</span>
                                 <span className="hidden md:inline">|</span>
