@@ -9,7 +9,7 @@
          SEO 優化套件
          ========================================== -->
     <meta name="description" content="2026 LinkedIn 經營攻略：解密 80% 隱藏市場，人資副總 Robin Hsu 親授打造 LinkedIn 個人品牌。">
-    <meta name="keywords" content="LinkedIn教學, 個人品牌, 職涯發展, 獵頭視角, 轉職攻略">
+    <meta name="keywords" content="LinkedIn教學, 個人品牌, 職涯發展, 獵頭視角, Robin Hsu, 轉職攻略, 2026趨勢">
     <meta name="author" content="Robin Hsu">
     
     <meta property="og:type" content="website">
@@ -93,7 +93,9 @@
             Type: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>,
             ExternalLink: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>,
             Search: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>,
-            QrCode: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            Coffee: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>,
+            Briefcase: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>,
+            Mail: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
         };
 
         const themes = {
@@ -120,6 +122,7 @@
                 checkIconBg: "border-gray-500 group-hover:border-yellow-500 group-hover:bg-yellow-500",
                 checkIconColor: "text-black",
                 linkButton: "bg-blue-600 hover:bg-blue-500 text-white",
+                promoCardBg: "bg-gradient-to-r from-gray-800 to-gray-900 border-l-4 border-yellow-500",
                 inputBg: "bg-gray-800 text-white border-gray-600 focus:border-yellow-500"
             },
             light: {
@@ -145,23 +148,22 @@
                 checkIconBg: "border-gray-300 group-hover:border-blue-600 group-hover:bg-blue-600",
                 checkIconColor: "text-white",
                 linkButton: "bg-blue-700 hover:bg-blue-800 text-white",
+                promoCardBg: "bg-gradient-to-r from-blue-50 to-white border-l-4 border-blue-600 shadow-md",
                 inputBg: "bg-white text-gray-900 border-gray-300 focus:border-blue-600"
             }
         };
 
-        // 智能響應式字體設定
-        // 使用 Tailwind 的響應式前綴 (md:) 自動處理不同裝置的大小
         const fontSizes = {
-            normal: { base: "text-lg md:text-xl", lg: "text-xl md:text-2xl", xl: "text-2xl md:text-3xl", title: "text-3xl md:text-5xl", code: "text-sm md:text-base", icon: "w-5 h-5 md:w-6 md:h-6", nav: "text-sm" },
-            large: { base: "text-xl md:text-2xl", lg: "text-2xl md:text-3xl", xl: "text-3xl md:text-4xl", title: "text-4xl md:text-6xl", code: "text-base md:text-lg", icon: "w-6 h-6 md:w-8 md:h-8", nav: "text-base" },
-            xl: { base: "text-2xl md:text-3xl", lg: "text-3xl md:text-4xl", xl: "text-4xl md:text-5xl", title: "text-5xl md:text-7xl", code: "text-lg md:text-xl", icon: "w-8 h-8 md:w-10 md:h-10", nav: "text-lg" }
+            normal: { base: "text-xl", lg: "text-2xl", xl: "text-3xl", title: "text-5xl", code: "text-base", icon: "w-6 h-6", nav: "text-sm" },
+            large: { base: "text-2xl", lg: "text-3xl", xl: "text-4xl", title: "text-6xl", code: "text-lg", icon: "w-8 h-8", nav: "text-base" },
+            xl: { base: "text-3xl", lg: "text-4xl", xl: "text-5xl", title: "text-7xl", code: "text-xl", icon: "w-10 h-10", nav: "text-lg" }
         };
 
         const SlideDeck = () => {
             const [currentSlide, setCurrentSlide] = useState(0);
             const [showAnswer, setShowAnswer] = useState(false);
             const [animate, setAnimate] = useState(true);
-            const [isDarkMode, setIsDarkMode] = useState(false); // 預設淺色模式
+            const [isDarkMode, setIsDarkMode] = useState(false); // 預設淺色
             const [fontSizeLevel, setFontSizeLevel] = useState('normal'); 
             
             const [isNavInputVisible, setIsNavInputVisible] = useState(false);
@@ -210,7 +212,7 @@
                     question: "Q: 你認為 LinkedIn 和 104/人力銀行最大的差別是什麼？",
                     answer: "104 是「比價」的紅海 (靜態)；LinkedIn 是「價值談判」的藍海 (動態)。",
                     points: [
-                        { title: "莊園理論", desc: "傳統求職是打獵 (餓了才去狩獵)；LinkedIn 是經營莊園：系統性的培育、灌溉、繁衍... 永續耕耘豐富的資源！" },
+                        { title: "莊園理論", desc: "傳統求職是打獵 (餓了才去狩獵)；LinkedIn 是經營莊園 (系統性的培育、灌溉、繁衍.... 永續耕耘豐富的資源！" },
                         { title: "PR99原則", desc: "99%的認為它是靜態履歷；頂尖的Top1將把它視為24小時曝光的舞台/自我品牌。" },
                         { title: "隱藏市場", desc: "80% 的好職缺未公開，是透過「人脈」、「被(獵頭)搜尋」成交的。" }
                     ]
@@ -308,6 +310,7 @@
                     module: "Keep In Touch",
                     title: "現在就建立連結！",
                     profileLink: "https://www.linkedin.com/in/robin-hsu-2b59a9a5/",
+                    mentorshipLink: "https://dada-fly.com/tw/mentors/robinhsu",
                     qrCodeImage: "https://raw.githubusercontent.com/robinaudi/linkedin-strategy/main/Xnip2025-12-10_11-39-59.jpg", 
                     articles: [
                         {
@@ -556,48 +559,94 @@
 
                     case "resource":
                         return (
-                            <div className="h-full flex flex-col p-8 md:p-12 relative">
+                            <div className="h-full flex flex-col p-8 md:p-12 relative overflow-y-auto no-scrollbar">
                                 <div className={`${theme.accent} ${fonts.nav} font-semibold tracking-widest uppercase mb-4`}>{slide.module}</div>
                                 <h2 className={`${fonts.title} font-bold ${theme.text} mb-8`}>{slide.title}</h2>
-                                <div className="flex flex-col md:flex-row justify-center items-center gap-10 mb-10">
-                                    <div>
-                                        <a href={slide.profileLink} target="_blank" rel="noreferrer" className={`group flex items-center gap-3 px-8 py-4 ${theme.linkButton} rounded-full font-bold shadow-lg transform hover:scale-105 transition-all ${fonts.lg}`}>
-                                            <span className="relative flex h-3 w-3">
-                                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                                              <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
-                                            </span>
-                                            Connect on LinkedIn
+
+                                {/* Top Section: Connections & Promo */}
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 flex-grow">
+                                    {/* Left: Free Connection */}
+                                    <div className={`${theme.cardBg} border ${theme.cardBorder} rounded-2xl p-6 flex flex-col items-center justify-between shadow-sm relative group h-full`}>
+                                        
+                                        <div className="absolute top-6 left-6 flex flex-col gap-2 z-10">
+                                             <span className="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full w-fit">#CareerTips</span>
+                                             <span className="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full w-fit">#LinkedInGrowth</span>
+                                        </div>
+
+                                        <div className="flex-grow flex flex-col items-center justify-center mt-8 mb-4">
+                                             {/* Huge QR Code */}
+                                             <img src={slide.qrCodeImage} alt="QR Code" className="w-56 h-56 object-contain mb-4 transform transition-transform group-hover:scale-105" />
+                                             <h3 className={`mt-2 ${fonts.lg} font-bold ${theme.text}`}>Robin Hsu</h3>
+                                             <p className={`${theme.subText} text-sm font-medium`}>電商總監 | 職涯教練</p>
+                                             <div className="flex gap-2 mt-3">
+                                                <span className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-md">#獵頭視角</span>
+                                                <span className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-md">#職涯策略</span>
+                                                <span className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-md">#個人品牌</span>
+                                             </div>
+                                        </div>
+                                        
+                                        <a href={slide.profileLink} target="_blank" rel="noreferrer" className={`w-full text-center py-3 ${theme.linkButton} rounded-xl font-bold shadow-md hover:scale-105 transition-all flex items-center justify-center gap-2 ${fonts.base}`}>
                                             <Icons.ExternalLink className="w-5 h-5" />
+                                            Connect on LinkedIn
                                         </a>
                                     </div>
-                                    <div className="flex flex-col items-center">
-                                        <div className={`p-2 bg-white rounded-lg shadow-md`}>
-                                            <img src={slide.qrCodeImage} alt="QR Code" className="w-32 h-32 object-contain" />
+
+                                    {/* Right: Premium Mentorship (DaDaFly) */}
+                                    <div className={`${theme.promoCardBg} rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden group h-full`}>
+                                        <div className="absolute top-0 right-0 p-4 opacity-10">
+                                            <Icons.Award className="w-32 h-32" />
                                         </div>
-                                        <span className={`mt-2 ${theme.subText} text-sm`}>Scan to Connect</span>
+                                        <div>
+                                            <div className="flex items-center gap-2 mb-4">
+                                                <span className="bg-yellow-400 text-black text-xs font-bold px-2 py-1 rounded-full uppercase tracking-wide">Premium</span>
+                                                <span className={`${theme.subText} text-sm font-medium`}>DaDaFly 導師計畫</span>
+                                            </div>
+                                            <h3 className={`${fonts.lg} font-bold ${theme.text} mb-4`}>1-on-1 深度職涯諮詢</h3>
+                                            <ul className={`space-y-3 ${theme.subText} ${fonts.base} mb-6`}>
+                                                <li className="flex items-center gap-3"><Icons.CheckCircle className="w-5 h-5 text-green-500"/> 履歷健檢優化</li>
+                                                <li className="flex items-center gap-3"><Icons.CheckCircle className="w-5 h-5 text-green-500"/> 模擬面試演練</li>
+                                                <li className="flex items-center gap-3"><Icons.CheckCircle className="w-5 h-5 text-green-500"/> 薪資談判策略</li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div className="mt-auto">
+                                            <div className="flex gap-2 flex-wrap mb-4">
+                                                <span className="bg-white/60 text-gray-700 border border-gray-200 text-xs px-2 py-1 rounded-md">#轉職</span>
+                                                <span className="bg-white/60 text-gray-700 border border-gray-200 text-xs px-2 py-1 rounded-md">#外商</span>
+                                                <span className="bg-white/60 text-gray-700 border border-gray-200 text-xs px-2 py-1 rounded-md">#高階獵頭</span>
+                                            </div>
+                                            
+                                            <a href={slide.mentorshipLink} target="_blank" rel="noreferrer" className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-white font-bold py-3 rounded-xl text-center shadow-lg hover:shadow-xl hover:scale-105 transition-all flex items-center justify-center gap-2">
+                                                <Icons.HeartHandshake className="w-5 h-5" />
+                                                前往預約時段
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 flex-grow overflow-y-auto no-scrollbar">
+
+                                {/* Bottom Section: Articles */}
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                                     {slide.articles.map((article, idx) => (
-                                        <a key={idx} href={article.link} target="_blank" rel="noreferrer" className={`block group ${theme.cardBg} rounded-2xl overflow-hidden border ${theme.cardBorder} transition-all hover:-translate-y-2`}>
-                                            <div className="h-40 bg-gray-700 overflow-hidden relative">
+                                        <a key={idx} href={article.link} target="_blank" rel="noreferrer" className={`block group ${theme.cardBg} rounded-2xl overflow-hidden border ${theme.cardBorder} transition-all hover:-translate-y-2 h-full flex flex-col`}>
+                                            <div className="h-32 bg-gray-200 overflow-hidden relative shrink-0">
                                                 <img src={article.image} alt={article.title} className="w-full h-full object-cover transition-transform group-hover:scale-110" />
-                                                <div className="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-colors"></div>
                                             </div>
-                                            <div className="p-6">
-                                                <h3 className={`${fonts.lg} font-bold ${theme.text} mb-2 group-hover:${theme.accent} transition-colors line-clamp-2`}>{article.title}</h3>
-                                                <p className={`${theme.subText} ${fonts.nav}`}>{article.subtitle}</p>
-                                                <div className={`mt-4 flex items-center ${theme.accent} text-sm font-semibold`}>
+                                            <div className="p-5 flex flex-col flex-grow">
+                                                <h3 className={`${fonts.base} font-bold ${theme.text} mb-2 group-hover:${theme.accent} line-clamp-2`}>{article.title}</h3>
+                                                <p className={`${theme.subText} text-sm line-clamp-2 mb-4 flex-grow`}>{article.subtitle}</p>
+                                                <div className={`flex items-center ${theme.accent} text-sm font-semibold mt-auto`}>
                                                     閱讀更多 <Icons.ArrowRight className="w-4 h-4 ml-1" />
                                                 </div>
                                             </div>
                                         </a>
                                     ))}
                                 </div>
-                                <div className="mt-8 flex justify-center">
-                                    <button onClick={() => setCurrentSlide(0)} className={`px-8 py-3 ${isDarkMode ? 'bg-gray-700 hover:bg-gray-600 text-white' : 'bg-gray-200 hover:bg-gray-300 text-gray-800'} rounded-xl ${fonts.nav} shadow-md`}>
-                                        重新播放
-                                    </button>
+
+                                <div className="flex justify-center pb-8">
+                                    <a href="mailto:robin.hsu@example.com" className={`px-8 py-3 ${isDarkMode ? 'bg-gray-700 hover:bg-gray-600 text-white' : 'bg-gray-200 hover:bg-gray-300 text-gray-800'} rounded-xl ${fonts.nav} shadow-md flex items-center gap-2 transition-transform hover:scale-105`}>
+                                        <Icons.Mail className="w-4 h-4" />
+                                        商務合作洽談
+                                    </a>
                                 </div>
                             </div>
                         );
