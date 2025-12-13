@@ -6,31 +6,29 @@
     <title>2026 LinkedIn 經營攻略 ｜ Robin Hsu</title>
     
     <!-- ==========================================
-         SEO 優化套件 (Search Engine Optimization)
+         SEO 優化套件
          ========================================== -->
     <meta name="description" content="2026 LinkedIn 經營攻略：從「隱形」到「被獵殺」。解密 80% 隱藏市場，資深獵頭/總監 Robin Hsu 親授打造前 1% 個人品牌資產。">
     <meta name="keywords" content="LinkedIn教學, 個人品牌, 職涯發展, 獵頭視角, Robin Hsu, 轉職攻略, 2026趨勢">
     <meta name="author" content="Robin Hsu">
     
-    <!-- Open Graph / Facebook / LinkedIn 預覽設定 -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://robinaudi.github.io/linkedin-strategy/">
     <meta property="og:title" content="2026 LinkedIn 經營攻略 | Robin Hsu">
     <meta property="og:description" content="解密 80% 隱藏市場：Hiring Manager 眼中的頂尖人才佈局術">
     <meta property="og:image" content="https://raw.githubusercontent.com/robinaudi/linkedin-strategy/main/og-image.jpg">
 
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="2026 LinkedIn 經營攻略 | Robin Hsu">
     <meta name="twitter:description" content="解密 80% 隱藏市場：獵頭、用人主管眼中的頂尖人才佈局術">
 
-    <!-- Google 結構化資料 (JSON-LD) -->
+    <!-- Google 結構化資料 -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Course",
       "name": "2026 LinkedIn 經營攻略",
-      "description": "2026 LinkedIn 經營攻略, 解密 80% 隱藏市場：獵頭、用人主管眼中的頂尖人才佈局術",
+      "description": "從「隱形」到「被獵殺」：打造前 1% 的 LinkedIn 個人品牌資產",
       "provider": {
         "@type": "Person",
         "name": "Robin Hsu",
@@ -39,25 +37,7 @@
     }
     </script>
 
-    <!-- ==========================================
-         GA4 流量分析 (Google Analytics 4) - 待啟用
-         TODO: 這裡預留了 GA4 代碼位置，請在申請後替換 G-XXXXXXXXXX
-         ========================================== -->
-    <!-- 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-XXXXXXXXXX');
-    </script> 
-    -->
-
-    <!-- ==========================================
-         核心資源載入 (CDN - 企業級節點)
-         Fixed: 修正 xintegrity 錯誤，確保跨瀏覽器相容性
-         ========================================== -->
+    <!-- 核心資源載入 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -69,16 +49,13 @@
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
         body { font-family: 'Noto Sans TC', sans-serif; }
         
-        /* 隱藏滾動條但保留功能 */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
-        /* 載入畫面 */
         #loading-screen { position: fixed; inset: 0; background: #111827; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; text-align: center; padding: 20px; }
         .spinner { border: 4px solid rgba(255, 255, 255, 0.1); width: 40px; height: 40px; border-radius: 50%; border-left-color: #fbbf24; animation: spin 1s linear infinite; margin-bottom: 20px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
-        /* 導航輸入框動畫 */
         .nav-input-enter { animation: fadeIn 0.2s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
     </style>
@@ -92,7 +69,6 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        // 移除 Loading
         setTimeout(() => {
             const loading = document.getElementById('loading-screen');
             if(loading) loading.style.opacity = '0';
@@ -101,7 +77,6 @@
 
         const { useState, useEffect, useRef } = React;
 
-        // --- Icons ---
         const Icons = {
             Target: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>,
             ChevronLeft: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>,
@@ -120,7 +95,6 @@
             Search: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         };
 
-        // --- Themes ---
         const themes = {
             dark: {
                 bg: "bg-gray-900",
@@ -174,7 +148,6 @@
             }
         };
 
-        // --- 字體大小設定 (可擴充) ---
         const fontSizes = {
             normal: { base: "text-xl", lg: "text-2xl", xl: "text-3xl", title: "text-5xl", code: "text-base", icon: "w-6 h-6", nav: "text-sm" },
             large: { base: "text-2xl", lg: "text-3xl", xl: "text-4xl", title: "text-6xl", code: "text-lg", icon: "w-8 h-8", nav: "text-base" },
@@ -188,7 +161,6 @@
             const [isDarkMode, setIsDarkMode] = useState(true); 
             const [fontSizeLevel, setFontSizeLevel] = useState('normal'); 
             
-            // 快速導航狀態
             const [isNavInputVisible, setIsNavInputVisible] = useState(false);
             const [navInputValue, setNavInputValue] = useState("");
             const navInputRef = useRef(null);
@@ -196,8 +168,6 @@
             const theme = isDarkMode ? themes.dark : themes.light;
             const fonts = fontSizes[fontSizeLevel];
             const instructor = "Robin Hsu |  電商總監 · ex.CIO · ex.人資副總";
-
-            // GitHub Repo 基礎路徑
             const repoBaseUrl = "https://raw.githubusercontent.com/robinaudi/linkedin-strategy/main";
 
             const toggleFontSize = () => {
@@ -319,26 +289,27 @@
                 },
                 {
                     type: "checklist",
-                    module: "執行力！",
-                    title: "立即行動：打造你的LinkedIn數位莊園",
+                    module: "結語：行動清單",
+                    title: "立即行動：打造你的數位資產",
+                    quote: "每天多比別人走一步，看似不起眼的足跡，將會不斷累積為成功的機率。",
                     checklist: [
-                        "檔案健檢：Headline 套用公式、照片專業化、About用彙整寫法",
-                        "固定發言：發表文章方向：活動心得、考照成就、甚至只是一句職場定律、或是人生金句",
-                        "社交投資：每週發一篇文章、轉發兩篇好文加上自己的觀點、到三篇文章按讚留言",
+                        "檔案建檢：Headline 套用公式、照片專業化、About用彙整寫法",
+                        "自我投資：發表文章洞悉、活動心得、考照成就、優化個人檔案佈局",
+                        "社交投資：每天 15 分鐘、留言 x 1 篇 + 邀請 x 10",
                         "時間分配：關注產業新知、少滑短影音、多用LinkedIn",
                         "人脈連結：每月參加一場活動、鎖定目標交換名片、強迫自己要有收穫！"
                     ]
                 },
                 {
                     type: "resource",
-                    module: "Keep In Touch",
-                    title: "流量密碼：與大師們建立連結！",
+                    module: "結語：保持連結",
+                    title: "讓大家快速找到我",
                     profileLink: "https://www.linkedin.com/in/robin-hsu-2b59a9a5/",
                     qrCodeImage: "https://raw.githubusercontent.com/robinaudi/linkedin-strategy/main/Xnip2025-12-10_11-39-59.jpg", 
                     articles: [
                         {
                             title: "『年紀越大，機會越多！』",
-                            subtitle: "這是我最近在一場聚會上，聽到最有感觸的一段話。台達電總經理在會議上，分享了....",
+                            subtitle: "這是我最近在一場聚會上，聽到最有感觸的一段話。",
                             link: "https://www.linkedin.com/feed/update/urn:li:activity:7401944907365740544/",
                             image: "https://media.licdn.com/dms/image/v2/D5622AQHXHi0xk5FNrA/feedshare-shrink_2048_1536/B56Zrj9qpNK8Aw-/0/1764761186174?e=1767225600&v=beta&t=AsWVPDOUrw18uoIQk4aAqogxqdE0nREDBWBm0w_Kpw0"
                         },
@@ -378,8 +349,6 @@
             const handleNavSubmit = (e) => {
                 e.preventDefault();
                 const input = navInputValue.trim();
-                
-                // 1. 嘗試解析為數字 (頁碼)
                 const pageNum = parseInt(input);
                 if (!isNaN(pageNum) && pageNum >= 1 && pageNum <= totalSlides) {
                     jumpToSlide(pageNum - 1);
@@ -387,15 +356,12 @@
                     setNavInputValue("");
                     return;
                 }
-
-                // 2. 嘗試搜尋關鍵字 (標題或內容)
                 const keyword = input.toLowerCase();
                 const foundIndex = slides.findIndex(slide => 
                     slide.title.toLowerCase().includes(keyword) || 
                     (slide.content && Array.isArray(slide.content) && slide.content.some(c => typeof c === 'string' && c.toLowerCase().includes(keyword))) ||
                     (slide.points && slide.points.some(p => p.title.toLowerCase().includes(keyword) || p.desc.toLowerCase().includes(keyword)))
                 );
-
                 if (foundIndex !== -1) {
                     jumpToSlide(foundIndex);
                     setIsNavInputVisible(false);
@@ -405,15 +371,12 @@
                 }
             };
 
-            // 鍵盤控制
             useEffect(() => {
                 const handleKeyDown = (e) => {
-                    // 如果正在輸入導航，不觸發簡報切換
                     if (isNavInputVisible) {
                         if (e.key === 'Escape') setIsNavInputVisible(false);
                         return;
                     }
-
                     if (e.key === 'ArrowRight') nextSlide();
                     if (e.key === 'ArrowLeft') prevSlide();
                     if (e.key === ' ' || e.key === 'Enter') setShowAnswer(!showAnswer);
@@ -422,7 +385,6 @@
                 return () => window.removeEventListener('keydown', handleKeyDown);
             }, [currentSlide, showAnswer, isNavInputVisible]);
 
-            // 自動聚焦輸入框
             useEffect(() => {
                 if (isNavInputVisible && navInputRef.current) {
                     navInputRef.current.focus();
@@ -492,8 +454,6 @@
                             <div className="h-full flex flex-col p-8 md:p-12">
                                 <div className={`${theme.accent} ${fonts.nav} font-semibold tracking-widest uppercase mb-4`}>{slide.module}</div>
                                 <h2 className={`${fonts.title} font-bold ${theme.text} mb-8`}>{slide.title}</h2>
-                                
-                                {/* Question Card */}
                                 <div className={`${theme.qCard} rounded-2xl p-8 mb-8 border-l-8 shadow-lg cursor-pointer transition-all hover:translate-x-2`} onClick={() => setShowAnswer(!showAnswer)}>
                                     <div className="flex items-start">
                                         <div className={`${isDarkMode ? 'bg-yellow-900/50 text-yellow-400' : 'bg-blue-50 text-blue-700'} p-3 rounded-xl mr-6 font-bold ${fonts.lg}`}>Q</div>
@@ -509,8 +469,6 @@
                                         </div>
                                     )}
                                 </div>
-
-                                {/* Content Points */}
                                 <div className="grid gap-6 flex-grow overflow-y-auto no-scrollbar">
                                     {slide.points && slide.points.map((point, idx) => (
                                         <div key={idx} className={`flex items-start ${isDarkMode ? 'bg-gray-900/50' : 'bg-gray-50'} p-6 rounded-xl`}>
@@ -521,7 +479,6 @@
                                             </div>
                                         </div>
                                     ))}
-
                                     {slide.actionItem && (
                                         <div className={`${theme.codeBoxBorder} border p-8 rounded-2xl mt-4`}>
                                             <h4 className={`${theme.accent} ${fonts.lg} font-bold mb-4 flex items-center`}><Icons.Target className={`${fonts.icon} mr-3`}/> {slide.actionItem.title}</h4>
@@ -545,7 +502,6 @@
                                 <div className={`${theme.accent} ${fonts.nav} font-semibold tracking-widest uppercase mb-4`}>{slide.module}</div>
                                 <h2 className={`${fonts.title} font-bold ${theme.text} mb-4`}>{slide.title}</h2>
                                 {slide.subtitle && <p className={`${fonts.xl} ${theme.subText} mb-10 font-light italic leading-relaxed`}>{slide.subtitle}</p>}
-                                
                                 <div className="grid gap-8 overflow-y-auto no-scrollbar">
                                     {slide.content.map((item, idx) => {
                                         const ItemIcon = item.Icon;
@@ -579,10 +535,8 @@
                                 <div className="text-center mb-12">
                                     <Icons.Award className={`w-24 h-24 ${theme.accent} mx-auto mb-6`} />
                                     <h2 className={`${fonts.title} font-bold ${theme.text} mb-4`}>{slide.title}</h2>
-                                    {/* 這是您指定的金句，已從您上傳的 index (5).html 中提取並保留 */}
-                                    <p className={`${theme.subText} ${fonts.xl}`}>每天多比別人走一步，看似不起眼的足跡，將會不斷累積為成功的機率。</p>
+                                    <p className={`${theme.subText} ${fonts.xl}`}>{slide.quote}</p>
                                 </div>
-                                
                                 <div className={`w-full max-w-4xl ${theme.cardBg} rounded-3xl p-10 shadow-2xl border ${isDarkMode ? 'border-gray-700' : 'border-gray-100'}`}>
                                     <div className="space-y-6">
                                         {slide.checklist.map((item, idx) => (
@@ -595,24 +549,15 @@
                                         ))}
                                     </div>
                                 </div>
-                                
-                                <div className="mt-16 flex space-x-6">
-                                    <button onClick={() => setCurrentSlide(0)} className={`px-8 py-3 ${isDarkMode ? 'bg-gray-700 hover:bg-gray-600 text-white' : 'bg-gray-200 hover:bg-gray-300 text-gray-800'} rounded-xl ${fonts.nav}`}>
-                                        重新播放
-                                    </button>
-                                </div>
                             </div>
                         );
 
                     case "resource":
                         return (
-                            <div className="h-full flex flex-col p-8 md:p-12">
+                            <div className="h-full flex flex-col p-8 md:p-12 relative">
                                 <div className={`${theme.accent} ${fonts.nav} font-semibold tracking-widest uppercase mb-4`}>{slide.module}</div>
                                 <h2 className={`${fonts.title} font-bold ${theme.text} mb-8`}>{slide.title}</h2>
-                                
-                                {/* Links & QR Code Section */}
                                 <div className="flex flex-col md:flex-row justify-center items-center gap-10 mb-10">
-                                    {/* Profile Link Button */}
                                     <div>
                                         <a href={slide.profileLink} target="_blank" rel="noreferrer" className={`group flex items-center gap-3 px-8 py-4 ${theme.linkButton} rounded-full font-bold shadow-lg transform hover:scale-105 transition-all ${fonts.lg}`}>
                                             <span className="relative flex h-3 w-3">
@@ -623,18 +568,13 @@
                                             <Icons.ExternalLink className="w-5 h-5" />
                                         </a>
                                     </div>
-
-                                    {/* QR Code Block */}
                                     <div className="flex flex-col items-center">
                                         <div className={`p-2 bg-white rounded-lg shadow-md`}>
-                                            {/* 已更新為您 Repo 中的圖片 */}
                                             <img src={slide.qrCodeImage} alt="QR Code" className="w-32 h-32 object-contain" />
                                         </div>
                                         <span className={`mt-2 ${theme.subText} text-sm`}>Scan to Connect</span>
                                     </div>
                                 </div>
-
-                                {/* Article Grid */}
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 flex-grow overflow-y-auto no-scrollbar">
                                     {slide.articles.map((article, idx) => (
                                         <a key={idx} href={article.link} target="_blank" rel="noreferrer" className={`block group ${theme.cardBg} rounded-2xl overflow-hidden border ${theme.cardBorder} transition-all hover:-translate-y-2`}>
@@ -652,6 +592,11 @@
                                         </a>
                                     ))}
                                 </div>
+                                <div className="mt-8 flex justify-center">
+                                    <button onClick={() => setCurrentSlide(0)} className={`px-8 py-3 ${isDarkMode ? 'bg-gray-700 hover:bg-gray-600 text-white' : 'bg-gray-200 hover:bg-gray-300 text-gray-800'} rounded-xl ${fonts.nav} shadow-md`}>
+                                        重新播放
+                                    </button>
+                                </div>
                             </div>
                         );
                     
@@ -663,48 +608,28 @@
             return (
                 <div className={`min-h-screen ${theme.bg} ${theme.text} font-sans flex items-center justify-center p-2 md:p-6 transition-colors duration-500`}>
                     <div className={`w-full max-w-[1400px] min-h-[800px] ${theme.containerBg} rounded-3xl shadow-2xl border ${isDarkMode ? 'border-gray-800' : 'border-gray-200'} overflow-hidden flex flex-col relative`}>
-                        
-                        {/* Control Buttons (右上角) */}
                         <div className="absolute top-6 right-6 z-20 flex space-x-3">
-                            <button 
-                                onClick={toggleFontSize}
-                                className={`p-3 rounded-full ${isDarkMode ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'} transition-all`}
-                                title="調整字體大小"
-                            >
+                            <button onClick={toggleFontSize} className={`p-3 rounded-full ${isDarkMode ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'} transition-all`} title="調整字體大小">
                                 <Icons.Type className="w-6 h-6" />
                             </button>
-                            <button 
-                                onClick={() => setIsDarkMode(!isDarkMode)}
-                                className={`p-3 rounded-full ${isDarkMode ? 'bg-gray-800 text-yellow-400 hover:bg-gray-700' : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'} transition-all`}
-                                title={isDarkMode ? "切換至淺色模式" : "切換至深色模式"}
-                            >
+                            <button onClick={() => setIsDarkMode(!isDarkMode)} className={`p-3 rounded-full ${isDarkMode ? 'bg-gray-800 text-yellow-400 hover:bg-gray-700' : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'} transition-all`} title={isDarkMode ? "切換至淺色模式" : "切換至深色模式"}>
                                 {isDarkMode ? <Icons.Sun className="w-6 h-6" /> : <Icons.Moon className="w-6 h-6" />}
                             </button>
                         </div>
-
-                        {/* Progress Bar */}
                         <div className={`w-full h-2 ${isDarkMode ? 'bg-gray-800' : 'bg-gray-200'} flex-shrink-0`}>
-                            <div 
-                                className={`h-full bg-gradient-to-r ${theme.progressBar} transition-all duration-500`}
-                                style={{ width: `${((currentSlide + 1) / totalSlides) * 100}%` }}
-                            ></div>
+                            <div className={`h-full bg-gradient-to-r ${theme.progressBar} transition-all duration-500`} style={{ width: `${((currentSlide + 1) / totalSlides) * 100}%` }}></div>
                         </div>
-
-                        {/* Main Content Area */}
                         <div className={`flex-grow relative overflow-hidden transition-opacity duration-300 ${animate ? 'opacity-100' : 'opacity-0'}`}>
                             {renderContent(slides[currentSlide])}
                         </div>
-
-                        {/* Navigation Bar */}
                         <div className={`${theme.navBg} border-t ${theme.navBorder} p-6 flex justify-between items-center z-10 flex-shrink-0`}>
                             <div className={`flex items-center ${theme.navText} ${fonts.nav} space-x-6`}>
                                 <span className={`font-bold ${theme.accent}`}>ROBIN HSU</span>
                                 <span className="hidden md:inline">|</span>
-                                {/* Quick Navigation Console */}
                                 {isNavInputVisible ? (
                                     <form onSubmit={handleNavSubmit} className="nav-input-enter">
                                         <div className="relative flex items-center">
-                                            <Icons.Search className={`w-4 h-4 absolute left-3 ${theme.text} opacity-50`} />
+                                            <Icons.Search className={`w-4 h-4 absolute left-3 ${theme.text}`} />
                                             <input 
                                                 ref={navInputRef}
                                                 type="text" 
@@ -723,24 +648,15 @@
                                         title="點擊搜尋或跳轉頁面"
                                     >
                                         {currentSlide + 1} / {totalSlides}
-                                        <Icons.Search className="w-3 h-3 opacity-50" />
+                                        <Icons.Search className={`w-4 h-4 ${theme.text} hover:${theme.accent}`} />
                                     </span>
                                 )}
                             </div>
-
                             <div className="flex space-x-4">
-                                <button 
-                                    onClick={prevSlide}
-                                    disabled={currentSlide === 0}
-                                    className={`p-3 rounded-full ${currentSlide === 0 ? 'text-gray-600 cursor-not-allowed' : `${theme.text} hover:${isDarkMode ? 'bg-gray-800' : 'bg-gray-100'}`}`}
-                                >
+                                <button onClick={prevSlide} disabled={currentSlide === 0} className={`p-3 rounded-full ${currentSlide === 0 ? 'text-gray-600 cursor-not-allowed' : `${theme.text} hover:${isDarkMode ? 'bg-gray-800' : 'bg-gray-100'}`}`}>
                                     <Icons.ChevronLeft className="w-8 h-8" />
                                 </button>
-                                <button 
-                                    onClick={nextSlide}
-                                    disabled={currentSlide === totalSlides - 1}
-                                    className={`p-3 rounded-full ${currentSlide === totalSlides - 1 ? 'text-gray-600 cursor-not-allowed' : `${theme.accent} hover:${isDarkMode ? 'bg-yellow-900/20' : 'bg-blue-50'}`}`}
-                                >
+                                <button onClick={nextSlide} disabled={currentSlide === totalSlides - 1} className={`p-3 rounded-full ${currentSlide === totalSlides - 1 ? 'text-gray-600 cursor-not-allowed' : `${theme.accent} hover:${isDarkMode ? 'bg-yellow-900/20' : 'bg-blue-50'}`}`}>
                                     <Icons.ChevronRight className="w-8 h-8" />
                                 </button>
                             </div>
