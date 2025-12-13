@@ -8,7 +8,7 @@
     <!-- ==========================================
          SEO 優化套件 (Search Engine Optimization)
          ========================================== -->
-    <meta name="description" content="LinkedIn 經營攻略：解密 80% 隱藏市場，人資副總、電商總監 Robin Hsu 親授打造前 1% 個人品牌資產。">
+    <meta name="description" content="2026 LinkedIn 經營攻略：從「隱形」到「被獵殺」。解密 80% 隱藏市場，資深獵頭/總監 Robin Hsu 親授打造前 1% 個人品牌資產。">
     <meta name="keywords" content="LinkedIn教學, 個人品牌, 職涯發展, 獵頭視角, Robin Hsu, 轉職攻略, 2026趨勢">
     <meta name="author" content="Robin Hsu">
     
@@ -56,9 +56,9 @@
 
     <!-- ==========================================
          核心資源載入 (CDN - 企業級節點)
+         Fixed: 修正 xintegrity 錯誤，確保跨瀏覽器相容性
          ========================================== -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 使用 cdnjs 確保企業內網可存取，移除可能導致錯誤的 xintegrity -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -174,7 +174,7 @@
             }
         };
 
-        // --- 字體大小設定 ---
+        // --- 字體大小設定 (可擴充) ---
         const fontSizes = {
             normal: { base: "text-xl", lg: "text-2xl", xl: "text-3xl", title: "text-5xl", code: "text-base", icon: "w-6 h-6", nav: "text-sm" },
             large: { base: "text-2xl", lg: "text-3xl", xl: "text-4xl", title: "text-6xl", code: "text-lg", icon: "w-8 h-8", nav: "text-base" },
@@ -237,7 +237,7 @@
                     question: "Q: 你認為 LinkedIn 和 104/人力銀行最大的差別是什麼？",
                     answer: "104 是「比價」的紅海 (靜態)；LinkedIn 是「價值談判」的藍海 (動態)。",
                     points: [
-                        { title: "莊園理論", desc: "傳統求職是餓了才打獵；LinkedIn 是經營莊園：用心耕耘每一個領域，才有取之不盡的珍稀資源)。" },
+                        { title: "莊園理論", desc: "傳統求職是打獵 (餓了才去狩獵)；LinkedIn 是經營莊園 (系統性的培育、灌溉、繁衍.... (Ref: index 5)" },
                         { title: "PR99原則", desc: "99%的認為它是靜態履歷；頂尖的Top1將把它視為24小時曝光的舞台/自我品牌。" },
                         { title: "隱藏市場", desc: "80% 的好職缺未公開，是透過「人脈」、「被(獵頭)搜尋」成交的。" }
                     ]
@@ -294,7 +294,7 @@
                     title: "社交貨幣 | 人脈存摺",
                     subtitle: "如何不寫(長)文章，也能提高檔案曝光？",
                     content: [
-                        "留言矩陣： 15 分鐘，去同領域專家的文章下留「高價值觀點」。",
+                        "留言矩陣：每天 15 分鐘，去同領域專家的文章下留「高價值觀點」。",
                         "成就他人：轉發或讚美他人的成就，是獲取好感的最快捷徑。",
                         "弱連結：神奇的轉職機會，可能來自「多年只見一次面」、「僅在LinkedIn互動過」的朋友。",
                         "提供(情緒)價值：升官、轉職、下午茶、下車文....通通給他愛心刷一排！"
@@ -320,7 +320,7 @@
                 {
                     type: "checklist",
                     module: "結語：行動清單",
-                    title: "立即行動：打造你的LinkedIn數位莊園",
+                    title: "立即行動：打造你的數位資產",
                     checklist: [
                         "檔案建檢：Headline 套用公式、照片專業化、About用彙整寫法",
                         "自我投資：發表文章洞悉、活動心得、考照成就、優化個人檔案佈局",
@@ -331,11 +331,11 @@
                 },
                 {
                     type: "resource",
-                    module: "Keep In Touch",
-                    title: "記得與大師(們)建立連結",
+                    module: "結語：保持連結",
+                    title: "讓大家快速找到我",
                     profileLink: "https://www.linkedin.com/in/robin-hsu-2b59a9a5/",
-                    // 請注意：QR Code 圖片目前使用佔位符，請記得更換為您的真實圖片
-                    qrCodeImage: "https://placehold.co/200x200/1e293b/fbbf24?text=QR+Code", 
+                    // 已更新為您 Repo 中的真實 QR Code 連結
+                    qrCodeImage: "https://raw.githubusercontent.com/robinaudi/linkedin-strategy/main/Xnip2025-12-10_11-39-59.jpg", 
                     articles: [
                         {
                             title: "『年紀越大，機會越多！』",
@@ -580,7 +580,8 @@
                                 <div className="text-center mb-12">
                                     <Icons.Award className={`w-24 h-24 ${theme.accent} mx-auto mb-6`} />
                                     <h2 className={`${fonts.title} font-bold ${theme.text} mb-4`}>{slide.title}</h2>
-                                    <p className={`${theme.subText} ${fonts.xl}`}>每天多比別人走一步，看似不起眼的足跡，將會不斷累積為成功的機率</p>
+                                    {/* 這是您指定的金句，已從您上傳的 index (5).html 中提取並保留 */}
+                                    <p className={`${theme.subText} ${fonts.xl}`}>每天多比別人走一步，看似不起眼的足跡，將會不斷累積為成功的機率。</p>
                                 </div>
                                 
                                 <div className={`w-full max-w-4xl ${theme.cardBg} rounded-3xl p-10 shadow-2xl border ${isDarkMode ? 'border-gray-700' : 'border-gray-100'}`}>
@@ -627,6 +628,7 @@
                                     {/* QR Code Block */}
                                     <div className="flex flex-col items-center">
                                         <div className={`p-2 bg-white rounded-lg shadow-md`}>
+                                            {/* 已更新為您 Repo 中的圖片 */}
                                             <img src={slide.qrCodeImage} alt="QR Code" className="w-32 h-32 object-contain" />
                                         </div>
                                         <span className={`mt-2 ${theme.subText} text-sm`}>Scan to Connect</span>
@@ -638,7 +640,6 @@
                                     {slide.articles.map((article, idx) => (
                                         <a key={idx} href={article.link} target="_blank" rel="noreferrer" className={`block group ${theme.cardBg} rounded-2xl overflow-hidden border ${theme.cardBorder} transition-all hover:-translate-y-2`}>
                                             <div className="h-40 bg-gray-700 overflow-hidden relative">
-                                                {/* 如果有真實圖片請移除 placeholder.co */}
                                                 <img src={article.image} alt={article.title} className="w-full h-full object-cover transition-transform group-hover:scale-110" />
                                                 <div className="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-colors"></div>
                                             </div>
