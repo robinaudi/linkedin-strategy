@@ -277,17 +277,17 @@
                     module: "結語：行動清單",
                     title: "立即行動：打造你的數位資產",
                     checklist: [
-                        "檔案體檢：Headline 套用公式，照片去背專業化，About請用彙整寫法",
+                        "檔案建檢：Headline 套用公式、照片專業化、About用彙整寫法",
                         "自我投資：發表文章洞悉、活動心得、考照成就、優化個人檔案佈局",
-                        "社交投資：依照LinkedIn建議，除了發表文章、還有轉發、按讚、新增好友",
-                        "自我精進：關注產業新知，少滑短影音，多用LinkedIn",
-                        "人脈連結：每月參加一場活動，鎖定目標交換名片，強迫自己要有收穫！"
+                        "社交投資：每天 15 分鐘、留言 x 1 篇 + 邀請 x 10",
+                        "時間分配：關注產業新知、少滑短影音、多用LinkedIn",
+                        "人脈連結：每月參加一場活動、鎖定目標交換名片、強迫自己要有收穫！"
                     ]
                 },
                 {
                     type: "resource",
-                    module: "記得按讚、留言、分享、開啟小叮噹",
-                    title: "Keep In Touch",
+                    module: "Keep In Touch",
+                    title: "讓大家快速找到我",
                     profileLink: "https://www.linkedin.com/in/robin-hsu-2b59a9a5/",
                     qrCodeImage: "https://placehold.co/200x200/1e293b/fbbf24?text=QR+Code", // 替換為您的 QR Code 圖片連結
                     articles: [
@@ -503,7 +503,7 @@
                                 <div className="text-center mb-12">
                                     <Icons.Award className={`w-24 h-24 ${theme.accent} mx-auto mb-6`} />
                                     <h2 className={`${fonts.title} font-bold ${theme.text} mb-4`}>{slide.title}</h2>
-                                    <p className={`${theme.subText} ${fonts.xl}`}>每天多比別人走一步，看似不起眼的足跡，將會不斷累積為成功的機率。</p>
+                                    <p className={`${theme.subText} ${fonts.xl}`}>每天進步 1%，一年後你會感謝現在的自己</p>
                                 </div>
                                 
                                 <div className={`w-full max-w-4xl ${theme.cardBg} rounded-3xl p-10 shadow-2xl border ${isDarkMode ? 'border-gray-700' : 'border-gray-100'}`}>
@@ -521,7 +521,7 @@
                                 
                                 <div className="mt-16 flex space-x-6">
                                     <button onClick={() => setCurrentSlide(0)} className={`px-8 py-3 ${isDarkMode ? 'bg-gray-700 hover:bg-gray-600 text-white' : 'bg-gray-200 hover:bg-gray-300 text-gray-800'} rounded-xl ${fonts.nav}`}>
-                                        重到首頁
+                                        重新播放
                                     </button>
                                 </div>
                             </div>
@@ -575,12 +575,6 @@
                                     ))}
                                 </div>
                             </div>
-
-                          <div className="mt-16 flex space-x-6">
-                                    <button onClick={() => setCurrentSlide(0)} className={`px-8 py-3 ${isDarkMode ? 'bg-gray-700 hover:bg-gray-600 text-white' : 'bg-gray-200 hover:bg-gray-300 text-gray-800'} rounded-xl ${fonts.nav}`}>
-                                        重到首頁
-                                    </button>
-                          </div>
                         );
                     
                     default:
