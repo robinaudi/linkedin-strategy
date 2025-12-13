@@ -13,7 +13,7 @@
     <meta property="og:title" content="2026 LinkedIn 經營攻略 | Robin Hsu">
     <meta property="og:description" content="解密 80% 隱藏市場：Hiring Manager 眼中的頂尖人才佈局術">
     
-    <!-- 3. 載入 React 核心 (更換為 cdnjs，企業防火牆較友善) -->
+    <!-- 3. 載入 React 核心 (更換為 cdnjs，解決 unpkg 被擋問題) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js" xintegrity="sha512-8Q6Y9XnTbOE+JNvjbqdB2/KuLYz2Z+tG4QJKGtH2MA8WaRuNKqaCy/r51csdIgg7oqcW0vQ2F6rFv8/dZG1gQg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js" xintegrity="sha512-MOCpqoRoisCTwJ8vQQiciZv0qcpdpVtLqa8mkmOA86wJZJqbHnO/0/qX5Y2eJ/0S8U/X+iFNvT/L2/XW5ubJDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js" xintegrity="sha512-awV4yJHRB9JbK/gg6P2vOwc6T56X896nDq9/wHH+1Z9Fz2t9Ks4vQpqMRXdSGAWIWHaoJ4AF6JGFslAQyXGx/w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -29,8 +29,8 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* 載入中畫面 */
-        #loading { position: fixed; inset: 0; background: #111827; color: white; display: flex; align-items: center; justify-content: center; z-index: 9999; }
+        /* 載入中畫面與錯誤提示樣式 */
+        #loading { position: fixed; inset: 0; background: #111827; color: white; display: flex; align-items: center; justify-content: center; z-index: 9999; flex-direction: column; }
     </style>
 </head>
 <body>
@@ -41,26 +41,27 @@
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
-            <p>正在載入總監的數位花園...</p>
-            <p style="font-size: 12px; color: #666; margin-top: 10px;" id="error-msg"></p>
+            <p class="text-xl font-bold">正在載入總監的數位花園...</p>
+            <p id="error-msg" style="margin-top: 20px; font-size: 14px; color: #f87171; max-width: 80%; margin-left: auto; margin-right: auto;"></p>
         </div>
     </div>
 
     <div id="root"></div>
 
-    <!-- 錯誤捕捉腳本 -->
+    <!-- 錯誤捕捉腳本：如果 CDN 載入失敗，會顯示錯誤訊息 -->
     <script>
         window.onerror = function(msg, url, line, col, error) {
             const errorDiv = document.getElementById('error-msg');
+            const loadingIcon = document.querySelector('#loading svg');
             if (errorDiv) {
-                errorDiv.innerHTML = "⚠️ 載入失敗。<br>請檢查網路或防火牆是否阻擋了 cdnjs/unpkg。<br>" + msg;
-                errorDiv.style.color = "#ef4444";
+                if(loadingIcon) loadingIcon.style.display = 'none';
+                errorDiv.innerHTML = "⚠️ <strong>載入失敗</strong><br>您的瀏覽器或公司網路可能阻擋了資源載入 (CDN)。<br>建議：<br>1. 關閉 AdBlock<br>2. 切換至手機網路<br><br>錯誤代碼: " + msg;
             }
         };
     </script>
 
     <script type="text/babel">
-        // 移除 loading 畫面
+        // React 啟動後移除 Loading 畫面
         setTimeout(() => {
             const loading = document.getElementById('loading');
             if(loading) loading.style.display = 'none';
@@ -548,7 +549,7 @@
                                 
                                 <div className="mt-16 flex space-x-6">
                                     <button onClick={() => setCurrentSlide(0)} className={`px-8 py-3 ${isDarkMode ? 'bg-gray-700 hover:bg-gray-600 text-white' : 'bg-gray-200 hover:bg-gray-300 text-gray-800'} rounded-xl ${fonts.nav}`}>
-                                        重到首頁
+                                        重新播放
                                     </button>
                                 </div>
                             </div>
