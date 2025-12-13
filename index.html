@@ -44,7 +44,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <style>
-        body { background-color: #111827; color: white; margin: 0; font-family: sans-serif; transition: background-color 0.5s ease; }
+        body { background-color: #f3f4f6; color: #111827; margin: 0; font-family: sans-serif; transition: background-color 0.5s ease; }
         .slide-container { transition: all 0.5s ease; }
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
         body { font-family: 'Noto Sans TC', sans-serif; }
@@ -52,8 +52,8 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
-        #loading-screen { position: fixed; inset: 0; background: #111827; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; text-align: center; padding: 20px; }
-        .spinner { border: 4px solid rgba(255, 255, 255, 0.1); width: 40px; height: 40px; border-radius: 50%; border-left-color: #fbbf24; animation: spin 1s linear infinite; margin-bottom: 20px; }
+        #loading-screen { position: fixed; inset: 0; background: #f3f4f6; color: #111827; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; text-align: center; padding: 20px; }
+        .spinner { border: 4px solid rgba(0, 0, 0, 0.1); width: 40px; height: 40px; border-radius: 50%; border-left-color: #0a66c2; animation: spin 1s linear infinite; margin-bottom: 20px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
         .nav-input-enter { animation: fadeIn 0.2s ease-out; }
@@ -92,7 +92,8 @@
             Moon: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>,
             Type: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>,
             ExternalLink: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>,
-            Search: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            Search: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>,
+            QrCode: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
         };
 
         const themes = {
@@ -148,17 +149,19 @@
             }
         };
 
+        // 智能響應式字體設定
+        // 使用 Tailwind 的響應式前綴 (md:) 自動處理不同裝置的大小
         const fontSizes = {
-            normal: { base: "text-xl", lg: "text-2xl", xl: "text-3xl", title: "text-5xl", code: "text-base", icon: "w-6 h-6", nav: "text-sm" },
-            large: { base: "text-2xl", lg: "text-3xl", xl: "text-4xl", title: "text-6xl", code: "text-lg", icon: "w-8 h-8", nav: "text-base" },
-            xl: { base: "text-3xl", lg: "text-4xl", xl: "text-5xl", title: "text-7xl", code: "text-xl", icon: "w-10 h-10", nav: "text-lg" }
+            normal: { base: "text-lg md:text-xl", lg: "text-xl md:text-2xl", xl: "text-2xl md:text-3xl", title: "text-3xl md:text-5xl", code: "text-sm md:text-base", icon: "w-5 h-5 md:w-6 md:h-6", nav: "text-sm" },
+            large: { base: "text-xl md:text-2xl", lg: "text-2xl md:text-3xl", xl: "text-3xl md:text-4xl", title: "text-4xl md:text-6xl", code: "text-base md:text-lg", icon: "w-6 h-6 md:w-8 md:h-8", nav: "text-base" },
+            xl: { base: "text-2xl md:text-3xl", lg: "text-3xl md:text-4xl", xl: "text-4xl md:text-5xl", title: "text-5xl md:text-7xl", code: "text-lg md:text-xl", icon: "w-8 h-8 md:w-10 md:h-10", nav: "text-lg" }
         };
 
         const SlideDeck = () => {
             const [currentSlide, setCurrentSlide] = useState(0);
             const [showAnswer, setShowAnswer] = useState(false);
             const [animate, setAnimate] = useState(true);
-            const [isDarkMode, setIsDarkMode] = useState(true); 
+            const [isDarkMode, setIsDarkMode] = useState(false); // 預設淺色模式
             const [fontSizeLevel, setFontSizeLevel] = useState('normal'); 
             
             const [isNavInputVisible, setIsNavInputVisible] = useState(false);
@@ -207,7 +210,7 @@
                     question: "Q: 你認為 LinkedIn 和 104/人力銀行最大的差別是什麼？",
                     answer: "104 是「比價」的紅海 (靜態)；LinkedIn 是「價值談判」的藍海 (動態)。",
                     points: [
-                        { title: "莊園理論", desc: "傳統求職是打獵 (餓了才去狩獵)；LinkedIn 是經營莊園 (系統性的培育、灌溉、繁衍.... (Ref: index 5)" },
+                        { title: "莊園理論", desc: "傳統求職是打獵 (餓了才去狩獵)；LinkedIn 是經營莊園：系統性的培育、灌溉、繁衍... 永續耕耘豐富的資源！" },
                         { title: "PR99原則", desc: "99%的認為它是靜態履歷；頂尖的Top1將把它視為24小時曝光的舞台/自我品牌。" },
                         { title: "隱藏市場", desc: "80% 的好職缺未公開，是透過「人脈」、「被(獵頭)搜尋」成交的。" }
                     ]
@@ -345,7 +348,6 @@
             const nextSlide = () => jumpToSlide(currentSlide + 1);
             const prevSlide = () => jumpToSlide(currentSlide - 1);
 
-            // 快速導航邏輯
             const handleNavSubmit = (e) => {
                 e.preventDefault();
                 const input = navInputValue.trim();
@@ -607,7 +609,7 @@
 
             return (
                 <div className={`min-h-screen ${theme.bg} ${theme.text} font-sans flex items-center justify-center p-2 md:p-6 transition-colors duration-500`}>
-                    <div className={`w-full max-w-[1400px] min-h-[800px] ${theme.containerBg} rounded-3xl shadow-2xl border ${isDarkMode ? 'border-gray-800' : 'border-gray-200'} overflow-hidden flex flex-col relative`}>
+                    <div className={`w-full max-w-[1400px] min-h-[100dvh] md:min-h-[800px] ${theme.containerBg} rounded-3xl shadow-2xl border ${isDarkMode ? 'border-gray-800' : 'border-gray-200'} overflow-hidden flex flex-col relative`}>
                         <div className="absolute top-6 right-6 z-20 flex space-x-3">
                             <button onClick={toggleFontSize} className={`p-3 rounded-full ${isDarkMode ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'} transition-all`} title="調整字體大小">
                                 <Icons.Type className="w-6 h-6" />
@@ -624,10 +626,10 @@
                         </div>
                         <div className={`${theme.navBg} border-t ${theme.navBorder} p-6 flex justify-between items-center z-10 flex-shrink-0`}>
                             <div className={`flex items-center ${theme.navText} ${fonts.nav} space-x-6`}>
-                                <span className={`font-bold ${theme.accent}`}>ROBIN HSU</span>
+                                <a href="https://www.linkedin.com/in/robin-hsu-2b59a9a5/" target="_blank" rel="noreferrer" className={`font-bold ${theme.accent} hover:underline`}>ROBIN HSU</a>
                                 <span className="hidden md:inline">|</span>
                                 {isNavInputVisible ? (
-                                    <form onSubmit={handleNavSubmit} className="nav-input-enter">
+                                    <form onSubmit={handleNavSubmit} className="nav-input-enter flex items-center">
                                         <div className="relative flex items-center">
                                             <Icons.Search className={`w-4 h-4 absolute left-3 ${theme.text}`} />
                                             <input 
@@ -636,20 +638,20 @@
                                                 value={navInputValue}
                                                 onChange={(e) => setNavInputValue(e.target.value)}
                                                 onBlur={() => { if(!navInputValue) setIsNavInputVisible(false); }}
-                                                placeholder="輸入頁碼或關鍵字..."
+                                                placeholder="輸入頁碼..."
                                                 className={`pl-9 pr-4 py-1 rounded-full border outline-none text-sm w-48 ${theme.inputBg}`}
                                             />
                                         </div>
                                     </form>
                                 ) : (
-                                    <span 
-                                        className={`hidden md:inline cursor-pointer hover:${theme.accent} transition-colors flex items-center gap-2`}
+                                    <div 
+                                        className={`cursor-pointer hover:${theme.accent} transition-colors flex items-center gap-2 whitespace-nowrap flex-nowrap`}
                                         onClick={() => setIsNavInputVisible(true)}
                                         title="點擊搜尋或跳轉頁面"
                                     >
-                                        {currentSlide + 1} / {totalSlides}
+                                        <span>{currentSlide + 1} / {totalSlides}</span>
                                         <Icons.Search className={`w-4 h-4 ${theme.text} hover:${theme.accent}`} />
-                                    </span>
+                                    </div>
                                 )}
                             </div>
                             <div className="flex space-x-4">
