@@ -56,7 +56,8 @@
             Sun: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2"/><path d="M12 21v2"/><path d="M4.22 4.22l1.42 1.42"/><path d="M18.36 18.36l1.42 1.42"/><path d="M1 12h2"/><path d="M21 12h2"/><path d="M4.22 19.78l1.42-1.42"/><path d="M18.36 5.64l1.42-1.42"/></svg>,
             Moon: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>,
             Type: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>,
-            ExternalLink: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            ExternalLink: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>,
+            QrCode: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
         };
 
         // --- 主題設定 ---
@@ -250,8 +251,8 @@
                     content: [
                         "留言矩陣：每天 15 分鐘，去同領域專家的文章下留「高價值觀點」。",
                         "成就他人：轉發或讚美他人的成就，是獲取好感的最快捷徑。",
-                        "弱連結：神奇的轉職機會，可能來自「多年只見一次面」、「僅在LinkedIn互動過」的朋友。",
-                        "提供(情緒)價值：升官、轉職、下午茶、下車文....通通給他愛心刷一排！。"
+                        "弱連結：真正的轉職機會，通常來自那些「這兩年只見過一次面」、「LinkedIn上互動過」的朋友。",
+                        "提供(情緒)價值：升官、轉職、甚至是下午茶、下車文，都可以上去留言(你難道會拒絕我對你的祝福？)。"
                     ]
                 },
                 {
@@ -263,11 +264,11 @@
                     points: [
                         { 
                         title: "極致的自我投資 (Input)", 
-                        desc: "「打開你的 iPhone/iPad 耗電分析, 時間都花在哪裡？。」\n 你的輸出品質，決定了你的身價。" 
+                        desc: "「打開你的 iPhone/iPad 耗電分析, 時間都花在哪裡？。」\n分配時間給吸收相關領域的新知與提升技能。你的輸出品質，決定了你的身價。" 
                         },
                         { 
                         title: "走出去 (Output)", 
-                        desc: "LinkedIn 是放大器，不是製造機。\n多參加實體活動，淬煉出「有效社交」，再帶回線上經營。" 
+                        desc: "LinkedIn 是放大器，不是製造機。\n多參加實體活動與論壇，面對面淬煉出「有效社交」，再將這些連結帶回線上經營。" 
                         }
                     ]
                 },
@@ -276,36 +277,37 @@
                     module: "結語：行動清單",
                     title: "立即行動：打造你的數位資產",
                     checklist: [
-                        "檔案建檢：Headline 套用公式、照片專業化、About用彙整寫法",
+                        "檔案體檢：Headline 套用公式，照片去背專業化，About請用彙整寫法",
                         "自我投資：發表文章洞悉、活動心得、考照成就、優化個人檔案佈局",
-                        "社交投資：每天 15 分鐘、留言 x 1 篇 + 邀請 x 10",
-                        "時間分配：關注產業新知、少滑短影音、多用LinkedIn",
-                        "人脈連結：每月參加一場活動、鎖定目標交換名片、強迫自己要有收穫！"
+                        "社交投資：每天 15 分鐘，留言 x 1 篇 + 邀請 x 10",
+                        "自我精進：關注產業新知，少滑短影音，多用LinkedIn",
+                        "人脈連結：每月參加一場活動，鎖定目標交換名片，強迫自己要有收穫！"
                     ]
                 },
                 {
                     type: "resource",
-                    module: "記得按讚、留言、分享、開啟小叮噹",
-                    title: "Keep In Touch",
+                    module: "結語：保持連結",
+                    title: "讓大家快速找到我",
                     profileLink: "https://www.linkedin.com/in/robin-hsu-2b59a9a5/",
+                    qrCodeImage: "https://placehold.co/200x200/1e293b/fbbf24?text=QR+Code", // 替換為您的 QR Code 圖片連結
                     articles: [
                         {
-                            title: "『年紀越大，機會越多！』",
-                            subtitle: "這是我最近在一場聚會上，聽到最有感觸的一段話。",
+                            title: "高流量文章精選 I",
+                            subtitle: "點擊閱讀詳細內容",
                             link: "https://www.linkedin.com/feed/update/urn:li:activity:7401944907365740544/",
-                            image: "https://media.licdn.com/dms/image/v2/D5622AQHXHi0xk5FNrA/feedshare-shrink_2048_1536/B56Zrj9qpNK8Aw-/0/1764761186174?e=1767225600&v=beta&t=AsWVPDOUrw18uoIQk4aAqogxqdE0nREDBWBm0w_Kpw0"
+                            image: "https://placehold.co/600x400/1e293b/fbbf24?text=Top+Article+1"
                         },
                         {
-                            title: "『讓人辭職的不是公司，而是主管。』 by 納德拉 (微軟執行長)",
-                            subtitle: "面試經典題：「什麼樣的公司會吸引你？」『團隊氛圍』、『重視溝通』、『鼓勵成長』.....",
+                            title: "高流量文章精選 II",
+                            subtitle: "點擊閱讀詳細內容",
                             link: "https://www.linkedin.com/feed/update/urn:li:activity:7205025752990326784/",
-                            image: "https://media.licdn.com/dms/image/v2/D5622AQE6LEla9FtPhA/feedshare-shrink_800/feedshare-shrink_800/0/1712811060952?e=1767225600&v=beta&t=qBrHyysjwv9Vxh-LOsYt2SocmuqnkGA3AcAXU7TyyL0"
+                            image: "https://placehold.co/600x400/1e293b/fbbf24?text=Top+Article+2"
                         },
                         {
-                            title: "『你知道嗎？只要你比其他主管健康，你就贏一半了！』",
-                            subtitle: "同事在得知某主管因病告假後，脫口說了這句話。（由於在我心中迴盪多時，決定分享這方面的話題。）",
+                            title: "高流量文章精選 III",
+                            subtitle: "點擊閱讀詳細內容",
                             link: "https://www.linkedin.com/feed/update/urn:li:activity:7184354551397847040/",
-                            image: "https://media.licdn.com/dms/image/v2/D5622AQFtRowONjHokw/feedshare-shrink_800/feedshare-shrink_800/0/1719184243670?e=1767225600&v=beta&t=oP-bNr-CpMlzWWQsefwA3Bu1vfi4uRcXCM0dQSjHU_g"
+                            image: "https://placehold.co/600x400/1e293b/fbbf24?text=Top+Article+3"
                         }
                     ]
                 }
@@ -531,16 +533,27 @@
                                 <div className={`${theme.accent} ${fonts.nav} font-semibold tracking-widest uppercase mb-4`}>{slide.module}</div>
                                 <h2 className={`${fonts.title} font-bold ${theme.text} mb-8`}>{slide.title}</h2>
                                 
-                                {/* Profile Link Button */}
-                                <div className="flex justify-center mb-10">
-                                    <a href={slide.profileLink} target="_blank" rel="noreferrer" className={`group flex items-center gap-3 px-8 py-4 ${theme.linkButton} rounded-full font-bold shadow-lg transform hover:scale-105 transition-all ${fonts.lg}`}>
-                                        <span className="relative flex h-3 w-3">
-                                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                                          <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
-                                        </span>
-                                        Connect on LinkedIn
-                                        <Icons.ExternalLink className="w-5 h-5" />
-                                    </a>
+                                {/* Links & QR Code Section */}
+                                <div className="flex flex-col md:flex-row justify-center items-center gap-10 mb-10">
+                                    {/* Profile Link Button */}
+                                    <div>
+                                        <a href={slide.profileLink} target="_blank" rel="noreferrer" className={`group flex items-center gap-3 px-8 py-4 ${theme.linkButton} rounded-full font-bold shadow-lg transform hover:scale-105 transition-all ${fonts.lg}`}>
+                                            <span className="relative flex h-3 w-3">
+                                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                                              <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+                                            </span>
+                                            Connect on LinkedIn
+                                            <Icons.ExternalLink className="w-5 h-5" />
+                                        </a>
+                                    </div>
+
+                                    {/* QR Code Block */}
+                                    <div className="flex flex-col items-center">
+                                        <div className={`p-2 bg-white rounded-lg shadow-md`}>
+                                            <img src={slide.qrCodeImage} alt="QR Code" className="w-32 h-32 object-contain" />
+                                        </div>
+                                        <span className={`mt-2 ${theme.subText} text-sm`}>Scan to Connect</span>
+                                    </div>
                                 </div>
 
                                 {/* Article Grid */}
