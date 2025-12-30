@@ -22,7 +22,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
     
-    <!-- PDF 生成套件 (穩定版) -->
+    <!-- PDF 生成套件 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
@@ -58,7 +58,6 @@
 
         const { useState, useEffect, useRef } = React;
 
-        // 圖示定義 (完全恢復原始 Icons)
         const Icons = {
             Download: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>,
             Target: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>,
@@ -121,12 +120,13 @@
             ];
 
             // ==========================================
-            // 完全重新修正：檔名下載邏輯
+            // 終極修正：直接使用原生存檔指令 (jsPDF)
             // ==========================================
             const generatePDF = async () => {
                 if (isDownloading) return;
                 setIsDownloading(true);
                 
+                // 設定 PDF 內容
                 const element = document.createElement('div');
                 element.style.width = '794px'; 
                 element.style.backgroundColor = '#ffffff';
@@ -157,17 +157,19 @@
 
                 const opt = {
                     margin: 0,
-                    filename: 'linkedin-strategy-by-Robin-Hsu.pdf', // 指定檔名
+                    filename: 'linkedin-strategy-by-Robin-Hsu.pdf', 
                     image: { type: 'jpeg', quality: 0.98 },
                     html2canvas: { scale: 2, useCORS: true },
                     jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
                 };
 
                 try {
-                    // 使用標準路徑：直接 save
-                    await html2pdf().set(opt).from(element).save();
+                    // 重要修正：使用 .toPdf().get('pdf').then(...) 繞過外掛存檔，直接控制
+                    await html2pdf().set(opt).from(element).toPdf().get('pdf').then(function (pdf) {
+                        pdf.save('linkedin-strategy-by-Robin-Hsu.pdf'); 
+                    });
                 } catch (e) {
-                    alert("下載失敗。");
+                    alert("下載失敗，請嘗試使用 Chrome 瀏覽器");
                 } finally {
                     setIsDownloading(false);
                 }
@@ -215,9 +217,6 @@
                 return () => window.removeEventListener('keydown', handleKeyDown);
             }, [currentSlide, showAnswer, isNavInputVisible]);
 
-            // ==========================================
-            // 頁面渲染邏輯 (Icons 已完全復原)
-            // ==========================================
             const renderContent = (slide) => {
                 const SlideIcon = slide.Icon;
                 switch (slide.type) {
