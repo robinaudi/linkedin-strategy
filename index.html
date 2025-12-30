@@ -49,7 +49,7 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        // 隱藏 Loading
+        // 隱藏 Loading 畫面
         setTimeout(() => {
             const loading = document.getElementById('loading-screen');
             if(loading) loading.style.opacity = '0';
@@ -58,7 +58,9 @@
 
         const { useState, useEffect, useRef } = React;
 
-        // 圖示定義
+        // ==========================================
+        // 所有圖示定義 (完整恢復)
+        // ==========================================
         const Icons = {
             Download: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>,
             Target: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>,
@@ -76,8 +78,6 @@
             Type: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>,
             ExternalLink: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>,
             Search: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>,
-            Coffee: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>,
-            Briefcase: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>,
             Mail: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
         };
 
@@ -151,7 +151,7 @@
                     content: [
                         { Icon: Icons.Video, title: "圖片、影音優先", desc: "演算法與眼球都愛視覺化的真實感，一定要圖文並茂（影片更加分）。" },
                         { Icon: Icons.HeartHandshake, title: "真實性", desc: "不要只寫 Job Description，要寫你的掙扎、失敗與成長故事。" },
-                        { Icon: Icons.Bot, title: "AI是你的職涯副駕駛", desc: "善用各式AI收集素材，提升質量，但是一定要有個人觀點。" }
+                        { Icon: Icons.Bot, title: "AI是你的職涯副駕駛", desc: "善用各式AI收集素材，提升質量，但是一定要有個人觀點，空泛的廢文會被降權。" }
                     ]
                 },
                 {
@@ -174,8 +174,8 @@
                     content: [
                         "不要寫：我是誰，我做了什麼",
                         "要寫：我能解決誰的痛苦",
-                        "技巧：埋入 JD 關鍵字以利 SEO",
-                        "結構：Hook (鉤子) → Story → Achievement → CTA"
+                        "技巧：埋入 JD (Job Description) 關鍵字以利 SEO",
+                        "結構：Hook (鉤子) → Story (職涯故事) → Achievement (量化數據) → CTA (互動性)"
                     ]
                 },
                 {
@@ -185,9 +185,9 @@
                     question: "Q: 申請工作前，除了等待，你還能做什麼？",
                     answer: "主動出擊、找出有效連結甚至是產業前輩、HR人員。",
                     points: [
-                        { title: "客製化邀請內容", desc: "不發送空白邀請：說明「你是誰」+「為何連結」。" },
-                        { title: "朋友的朋友還是你的朋友", desc: "利用地區、學歷找出在目標公司的學長姐。" },
-                        { title: "勇敢邀約面談 (Coffee Chat)", desc: "不求職缺，只求指點。問：「行業面臨挑戰？」" }
+                        { title: "客製化邀請內容", desc: "不發送空白邀請：說明「你是誰」+「為何連結」＋「我欣賞你的觀點」。" },
+                        { title: "朋友的朋友還是你的朋友", desc: "利用地區、學歷、證照、社群，找出在目標公司的學長姐，這是最容易的切入點。" },
+                        { title: "勇敢邀約面談 (Coffee Chat)", desc: "不求職缺，只求指點。問：「行業面臨挑戰？」、「轉職可能會遇到什麼門檻」。" }
                     ]
                 },
                 {
@@ -198,7 +198,8 @@
                     content: [
                         "留言矩陣：每天 15 分鐘，去同領域專家的文章下留「高價值觀點」。",
                         "成就他人：轉發或讚美他人的成就，是獲取好感的最快捷徑。",
-                        "提供價值：升官、轉職、下午茶、下車文....通通給他愛心刷一排！"
+                        "弱連結：神奇的轉職機會，可能來自「多年只見一次面」、「僅在LinkedIn互動過」的朋友。",
+                        "提供(情緒)價值：升官、轉職、下午茶、下車文....通通給他愛心刷一排！"
                     ]
                 },
                 {
@@ -208,8 +209,8 @@
                     question: "Q: 如何確保持續輸出高品質的內容？",
                     answer: "線上影響力，源自於線下的「飽讀詩書」與「高品質輸入」",
                     points: [
-                        { title: "極致的自我投資", desc: "分配時間給吸收新知。你的輸出品質，決定了你的身價。" },
-                        { title: "走出去", desc: "LinkedIn 是放大器。多參加實體活動，面對面淬煉出有效社交。" }
+                        { title: "極致的自我投資 (Input)", desc: "「打開你的 iPhone/iPad 耗電分析, 時間都花在哪裡？。」\n分配時間給吸收相關領域的新知與提升技能。你的輸出品質，決定了你的身價。" },
+                        { title: "走出去 (Output)", desc: "LinkedIn 是放大器，不是製造機。\n多參加實體活動與論壇，面對面淬煉出「有效社交」，再將這些連結帶回線上經營。" }
                     ]
                 },
                 {
@@ -218,11 +219,11 @@
                     title: "打造你的LinkedIn數位莊園",
                     quote: "每天多比別人走一步，看似不起眼的足跡，將會不斷累積為成功的機率。",
                     checklist: [
-                        "檔案建檢：Headline 套用公式、照片專業化",
+                        "檔案建檢：Headline 套用公式、照片專業化、About用彙整寫法",
                         "固定發文：發表活動心得、職場金句、人生格言",
-                        "社交投資：每天 15 分鐘、去留言、去建立新連結",
+                        "社交投資：每天 15 分鐘、去留言、去按讚、去轉發、去建立新連結",
                         "時間分配：關注產業新知、少滑短影音、多用LinkedIn",
-                        "人脈連結：鎖定目標交換名片、強迫自己要有收穫！"
+                        "人脈連結：每月參加一場活動、鎖定目標交換名片、強迫自己要有收穫！"
                     ]
                 },
                 {
@@ -240,13 +241,16 @@
                 }
             ];
 
+            // ==========================================
+            // PDF 生成邏輯 (檔名修正)
+            // ==========================================
             const generatePDF = async () => {
                 if (isDownloading) return;
                 setIsDownloading(true);
                 
                 const element = document.createElement('div');
                 element.style.padding = '0';
-                element.style.width = '794px'; // A4 寬度像素約值
+                element.style.width = '794px'; 
                 element.style.backgroundColor = '#ffffff';
 
                 let htmlContent = `
@@ -258,22 +262,16 @@
 
                 slides.forEach((slide, idx) => {
                     htmlContent += `
-                        <div style="page-break-after: always; padding: 50px; border-bottom: 1px solid #eee; font-family: 'Noto Sans TC', sans-serif;">
+                        <div style="page-break-after: always; padding: 50px; border-bottom: 1px solid #eee; font-family: sans-serif;">
                             <p style="color: #0a66c2; font-weight: bold; margin-bottom: 10px;">MODULE ${idx + 1}: ${slide.module || 'Intro'}</p>
                             <h2 style="font-size: 32px; color: #111827; margin-bottom: 30px; border-left: 8px solid #0a66c2; padding-left: 20px;">${slide.title}</h2>
-                            
-                            ${slide.question ? `<div style="background: #f0f7ff; padding: 20px; border-radius: 10px; margin-bottom: 25px;">
-                                <b>問題：</b> ${slide.question}<br><br>
-                                <b style="color: #0a66c2;">解答：</b> ${slide.answer}
-                            </div>` : ''}
-
+                            ${slide.question ? `<div style="background: #f0f7ff; padding: 20px; border-radius: 10px; margin-bottom: 25px;"><b>Q:</b> ${slide.question}<br><br><b>A:</b> ${slide.answer}</div>` : ''}
                             <div style="font-size: 18px; line-height: 1.8; color: #374151;">
                                 ${slide.content ? (Array.isArray(slide.content) ? slide.content.map(c => typeof c === 'string' ? `<div>• ${c}</div>` : `<div style="margin-top:15px;"><b>${c.title}</b>: ${c.desc}</div>`).join('') : slide.content) : ''}
                                 ${slide.points ? slide.points.map(p => `<div style="margin-top:20px;"><b>${p.title}</b><br>${p.desc}</div>`).join('') : ''}
-                                ${slide.checklist ? slide.checklist.map(i => `<div style="margin-top:10px;">[✓] ${i}</div>`).join('') : ''}
-                                ${slide.actionItem ? `<div style="background: #f9fafb; padding: 20px; border: 1px dashed #ccc; margin-top: 30px;"><b>行動指南：${slide.actionItem.title}</b><br><code>${slide.actionItem.code}</code></div>` : ''}
+                                ${slide.checklist ? slide.checklist.map(i => `<div style="margin-top:10px;">☑ ${i}</div>`).join('') : ''}
                             </div>
-                            <div style="margin-top: 50px; text-align: right; font-size: 12px; color: #999;">© 2026 Robin Hsu | LinkedIn Strategy Guide</div>
+                            <div style="margin-top: 50px; text-align: right; font-size: 12px; color: #999;">© 2026 Robin Hsu | linkedin-strategy-by-Robin-Hsu.PDF</div>
                         </div>
                     `;
                 });
@@ -282,7 +280,7 @@
 
                 const opt = {
                     margin: 0,
-                    filename: '2026_LinkedIn_Strategy_RobinHsu.pdf',
+                    filename: 'linkedin-strategy-by-Robin-Hsu.PDF',
                     image: { type: 'jpeg', quality: 0.98 },
                     html2canvas: { scale: 2, useCORS: true, letterRendering: true },
                     jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
@@ -291,7 +289,7 @@
                 try {
                     await html2pdf().set(opt).from(element).save();
                 } catch (e) {
-                    alert("PDF 生成失敗，請檢查網路連接。");
+                    alert("PDF 生成失敗。");
                 } finally {
                     setIsDownloading(false);
                 }
@@ -339,9 +337,12 @@
                 return () => window.removeEventListener('keydown', handleKeyDown);
             }, [currentSlide, showAnswer, isNavInputVisible]);
 
-            // 渲染內容函數 (簡化版)
+            // ==========================================
+            // 頁面渲染邏輯 (完整修復所有圖示顯示)
+            // ==========================================
             const renderContent = (slide) => {
                 const SlideIcon = slide.Icon;
+
                 switch (slide.type) {
                     case "intro":
                         return (
@@ -352,17 +353,16 @@
                                 <div className="space-y-6 text-left w-full max-w-4xl mx-auto">
                                     {slide.content.map((item, idx) => (
                                         <div key={idx} className={`flex items-start space-x-4 ${fonts.base} ${theme.text}`}>
-                                            <Icons.CheckCircle className={`${theme.accent} ${fonts.icon} mt-1`} />
+                                            <Icons.CheckCircle className={`${theme.accent} ${fonts.icon} mt-1 flex-shrink-0`} />
                                             <span>{item}</span>
                                         </div>
                                     ))}
                                 </div>
                                 <div className={`mt-16 ${fonts.base} ${theme.subText}`}>{instructor}</div>
-                                <button onClick={nextSlide} className={`mt-12 px-10 py-4 ${theme.buttonBg} ${theme.buttonText} ${fonts.lg} font-bold rounded-full shadow-lg flex items-center`}>
-                                    開始解密 <Icons.ArrowRight className="ml-3 w-6 h-6" />
-                                </button>
+                                <button onClick={nextSlide} className={`mt-12 px-10 py-4 ${theme.buttonBg} ${theme.buttonText} ${fonts.lg} font-bold rounded-full shadow-lg flex items-center`}>開始解密 <Icons.ArrowRight className="ml-3 w-6 h-6" /></button>
                             </div>
                         );
+
                     case "agenda":
                         return (
                             <div className="h-full flex flex-col p-8 md:p-12 animate-fadeIn">
@@ -370,8 +370,8 @@
                                 <h2 className={`${fonts.title} font-bold ${theme.text} mb-10`}>{slide.title}</h2>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 flex-grow items-center overflow-y-auto no-scrollbar">
                                     {slide.content.map((item, idx) => (
-                                        <div key={idx} className={`${theme.cardBg} p-8 rounded-2xl border ${theme.cardBorder} transition-all group`}>
-                                            <div className="text-6xl font-bold text-gray-400 group-hover:text-blue-500 mb-4">{item.id}</div>
+                                        <div key={idx} className={`${theme.cardBg} p-8 rounded-2xl border ${theme.cardBorder} transition-all group h-full flex flex-col justify-center`}>
+                                            <div className="text-6xl font-bold text-gray-400 group-hover:text-blue-500 mb-4 transition-colors">{item.id}</div>
                                             <h3 className={`${fonts.lg} font-bold ${theme.text} mb-3`}>{item.title}</h3>
                                             <p className={`${theme.subText} ${fonts.base}`}>{item.desc}</p>
                                         </div>
@@ -379,6 +379,7 @@
                                 </div>
                             </div>
                         );
+
                     case "concept":
                     case "action":
                     case "strategy":
@@ -407,9 +408,73 @@
                                             </div>
                                         </div>
                                     ))}
+                                    {slide.actionItem && (
+                                        <div className={`${theme.codeBoxBorder} border p-8 rounded-2xl mt-4`}>
+                                            <h4 className={`${theme.accent} ${fonts.lg} font-bold mb-4 flex items-center`}><Icons.Target className="w-6 h-6 mr-3"/> {slide.actionItem.title}</h4>
+                                            <div className={`${theme.codeBg} p-6 rounded-xl font-mono ${fonts.code} mb-4`}>{slide.actionItem.code}</div>
+                                            <div className={`${theme.subText} ${fonts.base}`}>{slide.actionItem.example}</div>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         );
+
+                    case "trend":
+                    case "deep-dive":
+                    case "advanced":
+                        return (
+                            <div className="h-full flex flex-col p-8 md:p-12 animate-fadeIn">
+                                <div className={`${theme.accent} ${fonts.nav} font-semibold uppercase mb-4`}>{slide.module}</div>
+                                <h2 className={`${fonts.title} font-bold ${theme.text} mb-4`}>{slide.title}</h2>
+                                {slide.subtitle && <p className={`${fonts.xl} ${theme.subText} mb-10 font-light italic`}>{slide.subtitle}</p>}
+                                <div className="grid gap-8 overflow-y-auto no-scrollbar">
+                                    {slide.content.map((item, idx) => {
+                                        const ItemIcon = item.Icon;
+                                        if (typeof item === 'string') {
+                                            return (
+                                                <div key={idx} className={`flex items-start space-x-6 ${theme.cardBg} p-6 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm`}>
+                                                    <div className={`w-3 h-3 ${theme.accentBg} rounded-full mt-3 flex-shrink-0`}></div>
+                                                    <span className={`${fonts.base} ${theme.text}`}>{item}</span>
+                                                </div>
+                                            );
+                                        }
+                                        return (
+                                            <div key={idx} className={`${theme.cardBg} p-8 rounded-2xl border-l-8 border-blue-600 shadow-sm flex items-start space-x-6 transition hover:transform hover:-translate-y-1`}>
+                                                <div className={theme.text}>{ItemIcon && <ItemIcon className="w-12 h-12" />}</div>
+                                                <div>
+                                                    <h3 className={`${fonts.lg} font-bold ${theme.text} mb-3`}>{item.title}</h3>
+                                                    <p className={`${theme.subText} ${fonts.base}`}>{item.desc}</p>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        );
+
+                    case "checklist":
+                        return (
+                            <div className="h-full flex flex-col p-8 md:p-12 items-center justify-center animate-fadeIn">
+                                <div className="text-center mb-12">
+                                    <Icons.Award className={`w-24 h-24 ${theme.accent} mx-auto mb-6`} />
+                                    <h2 className={`${fonts.title} font-bold ${theme.text} mb-4`}>{slide.title}</h2>
+                                    <p className={`${theme.subText} ${fonts.xl}`}>{slide.quote}</p>
+                                </div>
+                                <div className={`w-full max-w-4xl ${theme.cardBg} rounded-3xl p-10 shadow-2xl border ${isDarkMode ? 'border-gray-700' : 'border-gray-100'}`}>
+                                    <div className="space-y-6">
+                                        {slide.checklist.map((item, idx) => (
+                                            <div key={idx} className="flex items-start space-x-6 group">
+                                                <div className={`w-8 h-8 rounded-full border-2 ${theme.checkIconBg} flex items-center justify-center flex-shrink-0 mt-1`}>
+                                                    <Icons.CheckCircle className={`w-5 h-5 ${theme.checkIconColor}`} />
+                                                </div>
+                                                <span className={`${fonts.base} ${theme.text} leading-relaxed`}>{item}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        );
+
                     case "resource":
                         return (
                             <div className="h-full flex flex-col p-8 md:p-12 animate-fadeIn overflow-y-auto no-scrollbar">
@@ -427,7 +492,7 @@
                                 </div>
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     {slide.articles.map((a, i) => (
-                                        <a key={i} href={a.link} target="_blank" className={`${theme.cardBg} rounded-xl overflow-hidden border ${theme.cardBorder}`}>
+                                        <a key={i} href={a.link} target="_blank" className={`${theme.cardBg} rounded-xl overflow-hidden border ${theme.cardBorder} hover:shadow-lg transition-all`}>
                                             <img src={a.image} className="h-24 w-full object-cover" />
                                             <div className="p-3"><h4 className="font-bold text-sm line-clamp-1">{a.title}</h4></div>
                                         </a>
@@ -436,25 +501,7 @@
                             </div>
                         );
                     default:
-                        return (
-                            <div className="h-full flex flex-col p-8 md:p-12 animate-fadeIn">
-                                <h2 className={`${fonts.title} font-bold ${theme.text} mb-4`}>{slide.title}</h2>
-                                <div className="grid gap-4 overflow-y-auto no-scrollbar">
-                                    {slide.content && slide.content.map((item, idx) => (
-                                        <div key={idx} className={`${theme.cardBg} p-6 rounded-xl border border-gray-200`}>
-                                            <h3 className="font-bold mb-2">{item.title || "重點"}</h3>
-                                            <p className={theme.subText}>{item.desc || item}</p>
-                                        </div>
-                                    ))}
-                                    {slide.checklist && slide.checklist.map((item, idx) => (
-                                        <div key={idx} className="flex items-center space-x-4">
-                                            <Icons.CheckCircle className={theme.accent} />
-                                            <span>{item}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        );
+                        return <div>Unknown Slide Type</div>;
                 }
             };
 
@@ -462,7 +509,7 @@
                 <div className={`min-h-screen ${theme.bg} ${theme.text} flex items-center justify-center p-2 md:p-6 transition-colors duration-500`}>
                     <div className={`w-full max-w-[1400px] min-h-[100dvh] md:min-h-[850px] ${theme.containerBg} rounded-3xl shadow-2xl border ${isDarkMode ? 'border-gray-800' : 'border-gray-200'} overflow-hidden flex flex-col relative`}>
                         
-                        {/* 工具列 */}
+                        {/* 右上角工具列 */}
                         <div className="absolute top-6 right-6 z-20 flex space-x-3">
                             <button 
                                 onClick={generatePDF} 
@@ -493,7 +540,7 @@
                         {/* 底部導覽 */}
                         <div className={`${theme.navBg} border-t ${theme.navBorder} p-6 flex justify-between items-center z-10`}>
                             <div className={`flex items-center ${theme.navText} ${fonts.nav} space-x-6`}>
-                                <span className="font-bold text-blue-600">ROBIN HSU</span>
+                                <span className="font-bold text-blue-600 uppercase">Robin Hsu</span>
                                 <div onClick={() => setIsNavInputVisible(true)} className="cursor-pointer hover:text-blue-500 transition-colors flex items-center gap-2">
                                     {isNavInputVisible ? (
                                         <form onSubmit={handleNavSubmit}><input autoFocus type="number" value={navInputValue} onChange={e => setNavInputValue(e.target.value)} onBlur={() => setIsNavInputVisible(false)} className={`w-16 p-1 border rounded ${theme.inputBg}`} /></form>
