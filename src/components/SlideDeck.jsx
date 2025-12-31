@@ -2,13 +2,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import {
     Target, ChevronLeft, ChevronRight, CheckCircle, ArrowRight, Zap, Video, Bot,
     HeartHandshake, Award, Sun, Moon, Type, ExternalLink, Search, Coffee, Briefcase, Mail, FileDown,
-    Settings
+    Settings, Linkedin
 } from 'lucide-react';
 import { useContent } from '../hooks/useContent';
 
 const IconMap = {
     Target, ChevronLeft, ChevronRight, CheckCircle, ArrowRight, Zap, Video, Bot,
-    HeartHandshake, Award, Sun, Moon, Type, ExternalLink, Search, Coffee, Briefcase, Mail
+    HeartHandshake, Award, Sun, Moon, Type, ExternalLink, Search, Coffee, Briefcase, Mail, Linkedin
 };
 
 // ... Themes and FontSizes logic same as before ... 
