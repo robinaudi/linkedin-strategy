@@ -5,6 +5,7 @@ import {
     Settings, Linkedin
 } from 'lucide-react';
 import { useContent } from '../hooks/useContent';
+import SearchModal from './SearchModal';
 
 const IconMap = {
     Target, ChevronLeft, ChevronRight, CheckCircle, ArrowRight, Zap, Video, Bot,
@@ -85,9 +86,7 @@ const SlideDeck = ({ onDownloadPDF, isGeneratingPDF, onAdminClick }) => {
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [fontSizeLevel, setFontSizeLevel] = useState('normal');
 
-    const [isNavInputVisible, setIsNavInputVisible] = useState(false);
-    const [navInputValue, setNavInputValue] = useState("");
-    const navInputRef = useRef(null);
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
 
     const theme = isDarkMode ? themes.dark : themes.light;
     const fonts = fontSizes[fontSizeLevel];
@@ -115,50 +114,24 @@ const SlideDeck = ({ onDownloadPDF, isGeneratingPDF, onAdminClick }) => {
     const nextSlide = () => jumpToSlide(currentSlide + 1);
     const prevSlide = () => jumpToSlide(currentSlide - 1);
 
-    const handleNavSubmit = (e) => {
-        e.preventDefault();
-        const input = navInputValue.trim();
-        const pageNum = parseInt(input);
-        if (!isNaN(pageNum) && pageNum >= 1 && pageNum <= totalSlides) {
-            jumpToSlide(pageNum - 1);
-            setIsNavInputVisible(false);
-            setNavInputValue("");
-            return;
-        }
-        const keyword = input.toLowerCase();
-        const foundIndex = slideData.findIndex(slide =>
-            slide.title.toLowerCase().includes(keyword) ||
-            (slide.content && Array.isArray(slide.content) && slide.content.some(c => typeof c === 'string' && c.toLowerCase().includes(keyword))) ||
-            (slide.points && slide.points.some(p => p.title.toLowerCase().includes(keyword) || p.desc.toLowerCase().includes(keyword)))
-        );
-        if (foundIndex !== -1) {
-            jumpToSlide(foundIndex);
-            setIsNavInputVisible(false);
-            setNavInputValue("");
-        } else {
-            alert(`找不到包含 "${input}" 的頁面或無效的頁碼`);
-        }
-    };
-
     useEffect(() => {
         const handleKeyDown = (e) => {
-            if (isNavInputVisible) {
-                if (e.key === 'Escape') setIsNavInputVisible(false);
+            // Toggle Search with Cmd+K or / (if not in input)
+            if ((e.metaKey && e.key === 'k') || (e.ctrlKey && e.key === 'k') || (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName))) {
+                e.preventDefault();
+                setIsSearchOpen(true);
                 return;
             }
+
+            if (isSearchOpen) return; // Let SearchModal handle its own keys
+
             if (e.key === 'ArrowRight') nextSlide();
             if (e.key === 'ArrowLeft') prevSlide();
             if (e.key === ' ' || e.key === 'Enter') setShowAnswer(!showAnswer);
         };
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [currentSlide, showAnswer, isNavInputVisible]);
-
-    useEffect(() => {
-        if (isNavInputVisible && navInputRef.current) {
-            navInputRef.current.focus();
-        }
-    }, [isNavInputVisible]);
+    }, [currentSlide, showAnswer, isSearchOpen]);
 
     const renderContent = (slide) => {
         const SlideIcon = slide.iconName ? IconMap[slide.iconName] : null;
@@ -476,31 +449,18 @@ const SlideDeck = ({ onDownloadPDF, isGeneratingPDF, onAdminClick }) => {
                     <div className={`flex items-center ${theme.navText} ${fonts.nav} space-x-6`}>
                         <a href="https://www.linkedin.com/in/robin-hsu-2b59a9a5/" target="_blank" rel="noreferrer" className={`font-bold ${theme.accent} hover:underline`}>ROBIN HSU</a>
                         <span className="hidden md:inline">|</span>
-                        {isNavInputVisible ? (
-                            <form onSubmit={handleNavSubmit} className="nav-input-enter flex items-center">
-                                <div className="relative flex items-center">
-                                    <Search className={`w-4 h-4 absolute left-3 ${theme.text}`} />
-                                    <input
-                                        ref={navInputRef}
-                                        type="text"
-                                        value={navInputValue}
-                                        onChange={(e) => setNavInputValue(e.target.value)}
-                                        onBlur={() => { if (!navInputValue) setIsNavInputVisible(false); }}
-                                        placeholder="輸入頁碼..."
-                                        className={`pl-9 pr-4 py-1 rounded-full border outline-none text-sm w-48 ${theme.inputBg}`}
-                                    />
-                                </div>
-                            </form>
-                        ) : (
-                            <div
-                                className={`cursor-pointer hover:${theme.accent} transition-colors flex items-center gap-2 whitespace-nowrap flex-nowrap`}
-                                onClick={() => setIsNavInputVisible(true)}
-                                title="點擊搜尋或跳轉頁面"
-                            >
-                                <span>{currentSlide + 1} / {totalSlides}</span>
-                                <Search className={`w-4 h-4 ${theme.text} hover:${theme.accent}`} />
+
+                        <div
+                            className={`cursor-pointer hover:${theme.accent} transition-colors flex items-center gap-2 whitespace-nowrap flex-nowrap`}
+                            onClick={() => setIsSearchOpen(true)}
+                            title="搜尋 (Cmd+K)"
+                        >
+                            <span>{currentSlide + 1} / {totalSlides}</span>
+                            <div className={`flex items-center gap-2 px-3 py-1 rounded-full ${isDarkMode ? 'bg-gray-800' : 'bg-gray-100'} text-xs`}>
+                                <Search className={`w-3 h-3`} />
+                                <span className="hidden sm:inline opacity-60">Cmd+K</span>
                             </div>
-                        )}
+                        </div>
                     </div>
                     <div className="flex space-x-4">
                         <button onClick={prevSlide} disabled={currentSlide === 0} className={`p-3 rounded-full ${currentSlide === 0 ? 'text-gray-600 cursor-not-allowed' : `${theme.text} hover:${isDarkMode ? 'bg-gray-800' : 'bg-gray-100'}`}`}>
@@ -512,6 +472,13 @@ const SlideDeck = ({ onDownloadPDF, isGeneratingPDF, onAdminClick }) => {
                     </div>
                 </div>
             </div>
+
+            <SearchModal
+                isOpen={isSearchOpen}
+                onClose={() => setIsSearchOpen(false)}
+                slides={slideData}
+                onNavigate={(index) => jumpToSlide(index)}
+            />
         </div>
     );
 };
