@@ -164,38 +164,55 @@ const SlideDeck = ({ onDownloadPDF, isGeneratingPDF, onAdminClick }) => {
         const SlideIcon = slide.iconName ? IconMap[slide.iconName] : null;
 
         switch (slide.type) {
+
+
             case "intro":
                 return (
-                    <div className="flex flex-col items-center justify-center h-full text-center space-y-8 p-8 relative">
+                    <div className="flex flex-col items-center justify-center h-full text-center p-8 relative overflow-hidden">
+                        {/* Background Data Particles */}
+                        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                            {[...Array(20)].map((_, i) => (
+                                <div
+                                    key={i}
+                                    className={`absolute rounded-full opacity-20 ${isDarkMode ? 'bg-blue-400' : 'bg-blue-600'}`}
+                                    style={{
+                                        width: Math.random() * 10 + 5 + 'px',
+                                        height: Math.random() * 10 + 5 + 'px',
+                                        top: Math.random() * 100 + '%',
+                                        left: Math.random() * 100 + '%',
+                                        animation: `floatUp ${Math.random() * 10 + 5}s linear infinite`,
+                                        animationDelay: `-${Math.random() * 5}s`
+                                    }}
+                                ></div>
+                            ))}
+                        </div>
+
                         {/* ADMIN LOGIN LOGO (Intro) - Bottom Right */}
                         <div onClick={onAdminClick} className="absolute bottom-6 right-6 p-3 opacity-30 hover:opacity-100 cursor-pointer transition-all hover:scale-110 z-50" title="CMS 後台">
                             <Settings className="w-6 h-6 text-gray-500 hover:text-gray-700" />
                         </div>
 
-                        <div className="animate-bounce">
-                            {SlideIcon && <SlideIcon className={`w-20 h-20 ${theme.accent}`} />}
+                        <div className="animate-bounce mb-8 relative z-10">
+                            <Linkedin className="w-32 h-32 text-[#0077b5]" strokeWidth={1.5} />
                         </div>
-                        <h1 className={`${fonts.title} font-bold bg-clip-text text-transparent bg-gradient-to-r ${theme.titleGradient} leading-tight`}>
+
+                        <h1 className={`${fonts.title} font-bold text-[#0077b5] leading-tight mb-6 tracking-tight relative z-10`}>
                             {slide.title}
                         </h1>
-                        <h2 className={`${fonts.xl} ${theme.subText} font-light max-w-4xl leading-relaxed`}>
-                            {slide.subtitle}
+
+                        <h2 className={`${fonts.xl} ${theme.subText} font-light max-w-4xl leading-relaxed tracking-wide mb-8 relative z-10`}>
+                            {slide.subtitle} {slide.emoji && <span className="ml-2 animate-pulse inline-block">{slide.emoji}</span>}
                         </h2>
-                        <div className={`w-32 h-2 ${theme.accentBg} rounded-full my-6`}></div>
-                        <div className="space-y-6 text-left w-full max-w-4xl mx-auto">
-                            {slide.content.map((item, idx) => (
-                                <div key={idx} className={`flex items-start space-x-4 ${fonts.base} ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`}>
-                                    <CheckCircle className={`${theme.accent} ${fonts.icon} flex-shrink-0 mt-1`} />
-                                    <span>{item}</span>
-                                </div>
-                            ))}
-                        </div>
-                        <div className={`mt-16 ${fonts.base} ${theme.subText}`}>{instructor}</div>
+
+                        <div className="w-24 h-1.5 bg-[#0077b5] rounded-full mb-12 relative z-10"></div>
+
+                        <div className={`mt-8 ${fonts.base} ${theme.subText} relative z-10`}>{instructor}</div>
+
                         <button
                             onClick={nextSlide}
-                            className={`mt-12 px-10 py-4 ${theme.buttonBg} ${theme.buttonText} ${fonts.lg} font-bold rounded-full transition-all transform hover:scale-105 flex items-center shadow-lg`}
+                            className={`mt-12 px-12 py-5 bg-[#0077b5] hover:bg-[#006097] text-white ${fonts.lg} font-bold rounded-full transition-all transform hover:scale-105 hover:shadow-xl flex items-center shadow-lg relative z-10`}
                         >
-                            開始解密 <ArrowRight className={`ml-3 ${fonts.icon}`} />
+                            開始經營 <ArrowRight className={`ml-3 ${fonts.icon}`} />
                         </button>
                     </div>
                 );

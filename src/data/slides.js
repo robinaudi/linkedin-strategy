@@ -1,15 +1,11 @@
 export const slideData = [
     {
         type: "intro",
-        title: "2026 LinkedIn 經營攻略",
-        subtitle: "履歷被看見！透過 LinkedIn 打造你的數位莊園",
-        content: [
-            "思維重塑：為什麼你不需要投履歷",
-            "門面優化：決策者視角 — 黃金六秒關鍵",
-            "人脈佈局：主動出擊、善用弱連結",
-            "內功心法：自我投資、長期佈局、有效社交"
-        ],
-        iconName: "Target"
+        title: "LinkedIn 經營攻略",
+        subtitle: "履歷被看見！打造你的數位莊園",
+        emoji: "✨",
+        content: [],
+        iconName: "Linkedin"
     },
     {
         type: "agenda",

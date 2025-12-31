@@ -228,6 +228,18 @@ const CMS = () => {
                             />
                             <p className="text-xs text-gray-400">Supported: Target, Zap, Video, Bot, Award, etc.</p>
                         </div>
+                        {slide.type === 'intro' && (
+                            <div className="space-y-2">
+                                <label className="text-sm font-semibold text-gray-700">Emoji</label>
+                                <input
+                                    type="text"
+                                    value={slide.emoji || ''}
+                                    onChange={(e) => updateSlide(selectedSlideIndex, 'emoji', e.target.value)}
+                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                    placeholder="e.g. ✨, 🚀"
+                                />
+                            </div>
+                        )}
                     </div>
 
                     <div className="border-t border-gray-100 my-4"></div>
@@ -509,8 +521,8 @@ const CMS = () => {
                                 key={idx}
                                 onClick={() => setSelectedSlideIndex(idx)}
                                 className={`w-full text-left p-3 rounded-xl transition-all border-l-4 flex items-center justify-between group ${selectedSlideIndex === idx
-                                        ? 'bg-blue-900/40 border-blue-500 text-white'
-                                        : 'border-transparent text-gray-400 hover:bg-gray-800 hover:text-white'
+                                    ? 'bg-blue-900/40 border-blue-500 text-white'
+                                    : 'border-transparent text-gray-400 hover:bg-gray-800 hover:text-white'
                                     }`}
                             >
                                 <div className="truncate pr-2">
@@ -613,9 +625,9 @@ const CMS = () => {
                                                     </td>
                                                     <td className="p-4">
                                                         <span className={`px-3 py-1 rounded-full text-xs font-bold border ${!log.source ? 'bg-gray-100 text-gray-500 border-gray-200' :
-                                                                log.source.includes('LinkedIn') ? 'bg-blue-100 text-blue-800 border-blue-200' :
-                                                                    log.source.includes('大大') ? 'bg-yellow-100 text-yellow-800 border-yellow-200' :
-                                                                        'bg-purple-100 text-purple-800 border-purple-200'
+                                                            log.source.includes('LinkedIn') ? 'bg-blue-100 text-blue-800 border-blue-200' :
+                                                                log.source.includes('大大') ? 'bg-yellow-100 text-yellow-800 border-yellow-200' :
+                                                                    'bg-purple-100 text-purple-800 border-purple-200'
                                                             }`}>
                                                             {log.source || 'Unknown'}
                                                         </span>
