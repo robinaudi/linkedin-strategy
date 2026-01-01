@@ -133,13 +133,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('burghley_house.jpg');
+            background-image: url('burghley_house_v2.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             z-index: -2;
-            filter: brightness(0.6);
-            /* Adjust base brightness of image if needed */
+            filter: brightness(0.3);
+            /* Darker base image for contrast */
         }
 
         body::after {
@@ -149,8 +149,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.60);
-            /* 60% opacity black overlay for better visibility */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Overlay to ensure text pops */
             z-index: -1;
             pointer-events: none;
         }
@@ -205,23 +205,23 @@
         const themes = {
             dark: {
                 bg: "bg-transparent", /* Transparent to show body background */
-                containerBg: "bg-gray-900/80 backdrop-blur-md",
-                cardBg: "bg-gray-800",
+                containerBg: "bg-transparent",
+                cardBg: "bg-gray-800/80 backdrop-blur-md",
                 cardBorder: "border-gray-700 hover:border-yellow-500",
                 text: "text-white",
-                subText: "text-gray-300",
-                accent: "text-yellow-500",
+                subText: "text-gray-200",
+                accent: "text-yellow-400",
                 accentBg: "bg-yellow-500",
                 buttonBg: "bg-yellow-600 hover:bg-yellow-500",
                 buttonText: "text-black",
-                titleGradient: "from-yellow-400 to-yellow-100",
+                titleGradient: "from-yellow-300 to-yellow-100",
                 navBg: "bg-gray-900",
                 navBorder: "border-gray-800",
-                navText: "text-gray-500",
+                navText: "text-gray-400",
                 progressBar: "from-yellow-600 to-yellow-400",
-                qCard: "bg-gray-800 border-yellow-500",
+                qCard: "bg-gray-800/90 border-yellow-500",
                 numberBg: "bg-blue-900 text-blue-300",
-                codeBg: "bg-black text-green-400",
+                codeBg: "bg-black/80 text-green-400",
                 codeBoxBorder: "bg-blue-900/30 border-blue-500/30",
                 checkIconBg: "border-gray-500 group-hover:border-yellow-500 group-hover:bg-yellow-500",
                 checkIconColor: "text-black",
@@ -230,30 +230,32 @@
                 inputBg: "bg-gray-800 text-white border-gray-600 focus:border-yellow-500"
             },
             light: {
-                bg: "bg-transparent", /* Transparent to show body background */
-                containerBg: "bg-transparent", /* Transparent to show full manor background */
-                cardBg: "bg-white/60 backdrop-blur-sm", /* More transparent cards */
-                cardBorder: "border-gray-200 hover:border-blue-600 shadow-sm hover:shadow-md",
-                text: "text-gray-900",
-                subText: "text-gray-700",
-                accent: "text-blue-700",
-                accentBg: "bg-blue-700",
-                buttonBg: "bg-blue-700 hover:bg-blue-600",
+                // Force Light theme to also use white text / clear backgrounds 
+                // because the underlying manor image is dark and we want it visible
+                bg: "bg-transparent",
+                containerBg: "bg-transparent",
+                cardBg: "bg-gray-900/40 backdrop-blur-sm", /* Dark glass for light mode too, or white glass with dark text? User said they can't see text. */
+                cardBorder: "border-gray-200/30 hover:border-white/50 shadow-sm",
+                text: "text-white", /* FORCE WHITE TEXT */
+                subText: "text-gray-200",
+                accent: "text-blue-300",
+                accentBg: "bg-blue-500",
+                buttonBg: "bg-blue-600 hover:bg-blue-500",
                 buttonText: "text-white",
-                titleGradient: "from-blue-800 to-blue-600",
-                navBg: "bg-white",
-                navBorder: "border-gray-200",
-                navText: "text-gray-400",
-                progressBar: "from-blue-700 to-blue-400",
-                qCard: "bg-white border-blue-600 shadow-md",
+                titleGradient: "from-blue-200 to-white",
+                navBg: "bg-transparent",
+                navBorder: "border-white/20",
+                navText: "text-gray-300",
+                progressBar: "from-blue-400 to-blue-200",
+                qCard: "bg-black/50 border-blue-400 shadow-md",
                 numberBg: "bg-blue-100 text-blue-800",
-                codeBg: "bg-gray-800 text-green-300",
-                codeBoxBorder: "bg-blue-50 border-blue-200",
-                checkIconBg: "border-gray-300 group-hover:border-blue-600 group-hover:bg-blue-600",
+                codeBg: "bg-gray-900 text-green-300",
+                codeBoxBorder: "bg-blue-50/10 border-blue-200/30",
+                checkIconBg: "border-gray-300 group-hover:border-blue-400 group-hover:bg-blue-400",
                 checkIconColor: "text-white",
-                linkButton: "bg-blue-700 hover:bg-blue-800 text-white",
-                promoCardBg: "bg-gradient-to-r from-blue-50 to-white border-l-4 border-blue-600 shadow-md",
-                inputBg: "bg-white text-gray-900 border-gray-300 focus:border-blue-600"
+                linkButton: "bg-blue-600 hover:bg-blue-700 text-white",
+                promoCardBg: "bg-gradient-to-r from-blue-900/50 to-black/50 border-l-4 border-blue-400 shadow-md",
+                inputBg: "bg-white/10 text-white border-gray-300 focus:border-blue-400"
             }
         };
 
@@ -271,84 +273,98 @@
                 const ctx = canvas.getContext('2d');
                 let animationFrameId;
                 let particles = [];
-                const particleCount = 200;
-                let phase = 'gather'; // gather, hold, disperse
+                const particleDensity = 4; // Lower is denser (step size)
+                let targetPoints = [];
+                let phase = 'gather';
                 let phaseTimer = 0;
 
-                // LinkedIn Logo Shape Points (Simplified)
-                // "in" distinct shapes
-                const targetPoints = [];
-                // Generate points for "i" dot
-                for (let i = 0; i < 30; i++) targetPoints.push({ x: 100 + Math.random() * 30, y: 80 + Math.random() * 30 });
-                // Generate points for "i" body
-                for (let i = 0; i < 50; i++) targetPoints.push({ x: 100 + Math.random() * 30, y: 130 + Math.random() * 80 });
-                // Generate points for "n"
-                for (let i = 0; i < 120; i++) {
-                    // rough "n" shape approximation
-                    const t = Math.random();
-                    if (t < 0.4) targetPoints.push({ x: 150 + Math.random() * 30, y: 130 + Math.random() * 80 }); // left leg
-                    else if (t < 0.7) targetPoints.push({ x: 150 + Math.random() * 60, y: 130 + Math.random() * 30 }); // top arch
-                    else targetPoints.push({ x: 190 + Math.random() * 30, y: 130 + Math.random() * 80 }); // right leg
-                }
+                // Load Image to get points
+                const img = new Image();
+                img.src = 'logo_for_particles.png';
+                img.onload = () => {
+                    const tempCanvas = document.createElement('canvas');
+                    const size = 300; // Canvas size
+                    const imgSize = 120; // Logo size in canvas
+                    tempCanvas.width = size;
+                    tempCanvas.height = size;
+                    const tempCtx = tempCanvas.getContext('2d');
 
-                // Initialize random particles
-                for (let i = 0; i < particleCount; i++) {
-                    particles.push({
-                        x: Math.random() * canvas.width,
-                        y: Math.random() * canvas.height,
-                        tx: targetPoints[i % targetPoints.length].x,
-                        ty: targetPoints[i % targetPoints.length].y,
-                        vx: (Math.random() - 0.5) * 2,
-                        vy: (Math.random() - 0.5) * 2,
-                        color: '#0a66c2',
-                        size: Math.random() * 3 + 1
+                    // Draw image centered
+                    const offset = (size - imgSize) / 2;
+                    tempCtx.drawImage(img, offset, offset, imgSize, imgSize);
+
+                    const imageData = tempCtx.getImageData(0, 0, size, size);
+                    const data = imageData.data;
+
+                    // Scan for visible pixels
+                    for (let y = 0; y < size; y += particleDensity) {
+                        for (let x = 0; x < size; x += particleDensity) {
+                            const index = (y * size + x) * 4;
+                            // Check blue channel or alpha - LinkedIn logo is blue/white. 
+                            // Assuming we want particles where the logo has COLOR (blue background of logo) or White text?
+                            // User wants "Logo particles".
+                            // If the uploaded logo is the standard Blue Square with white "in", we probably want the whole square?
+                            // Or just the "in"?
+                            // Usually "particles forming logo" implies the text "in". 
+                            // But user said "換成這個 logo" (Change to this logo) and uploaded the blue square.
+                            // Let's form the blue square with particles.
+                            if (data[index + 3] > 128) { // If opaque enough
+                                if (Math.random() > 0.5) { // 50% chance to spawn particle for "density" control
+                                    targetPoints.push({ x, y, color: '#0a66c2' });
+                                }
+                            }
+                        }
+                    }
+
+                    // Initialize particles
+                    targetPoints.forEach(pt => {
+                        particles.push({
+                            x: Math.random() * canvas.width,
+                            y: Math.random() * canvas.height,
+                            tx: pt.x,
+                            ty: pt.y,
+                            vx: (Math.random() - 0.5) * 5,
+                            vy: (Math.random() - 0.5) * 5,
+                            color: pt.color,
+                            size: Math.random() * 1.5 + 0.5
+                        });
                     });
-                }
+                };
 
                 const render = () => {
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
                     phaseTimer++;
 
                     // Phase Logic
-                    if (phase === 'gather' && phaseTimer > 200) {
+                    if (phase === 'gather' && phaseTimer > 250) {
                         phase = 'hold';
                         phaseTimer = 0;
-                    } else if (phase === 'hold' && phaseTimer > 100) {
+                    } else if (phase === 'hold' && phaseTimer > 150) {
                         phase = 'disperse';
                         phaseTimer = 0;
-                    } else if (phase === 'disperse' && phaseTimer > 100) {
+                    } else if (phase === 'disperse' && phaseTimer > 150) {
                         phase = 'gather';
                         phaseTimer = 0;
-                        // Reset to random positions outside center roughly
                         particles.forEach(p => {
-                            p.vx = (Math.random() - 0.5) * 10;
-                            p.vy = (Math.random() - 0.5) * 10;
+                            p.vx = (Math.random() - 0.5) * 15;
+                            p.vy = (Math.random() - 0.5) * 15;
                         });
                     }
 
                     particles.forEach(p => {
                         if (phase === 'gather') {
-                            // Lerp to target
-                            p.x += (p.tx - p.x) * 0.05;
-                            p.y += (p.ty - p.y) * 0.05;
+                            p.x += (p.tx - p.x) * 0.08;
+                            p.y += (p.ty - p.y) * 0.08;
                         } else if (phase === 'hold') {
-                            // Jitter
                             p.x += (Math.random() - 0.5) * 0.5;
                             p.y += (Math.random() - 0.5) * 0.5;
                         } else if (phase === 'disperse') {
-                            // Move away
                             p.x += p.vx;
                             p.y += p.vy;
-                            // Bounce off walls
-                            if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-                            if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
                         }
 
                         ctx.fillStyle = p.color;
-                        ctx.beginPath();
-                        ctx.rect(p.x, p.y, p.size, p.size); // Square shards
-                        ctx.fill();
+                        ctx.fillRect(p.x, p.y, p.size, p.size);
                     });
 
                     animationFrameId = window.requestAnimationFrame(render);
@@ -356,9 +372,7 @@
 
                 render();
 
-                return () => {
-                    window.cancelAnimationFrame(animationFrameId);
-                };
+                return () => window.cancelAnimationFrame(animationFrameId);
             }, []);
 
             return <canvas ref={canvasRef} width={300} height={300} />;
@@ -368,7 +382,7 @@
             const [currentSlide, setCurrentSlide] = useState(0);
             const [showAnswer, setShowAnswer] = useState(false);
             const [animate, setAnimate] = useState(true);
-            const [isDarkMode, setIsDarkMode] = useState(false); // 預設淺色
+            const [isDarkMode, setIsDarkMode] = useState(true); // Default to Dark Mode for Manor Theme
             const [fontSizeLevel, setFontSizeLevel] = useState('normal');
 
             const [isNavInputVisible, setIsNavInputVisible] = useState(false);
