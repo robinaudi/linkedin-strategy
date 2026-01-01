@@ -633,20 +633,15 @@
                                     {slide.subtitle}
                                 </h2>
                                 <div className={`w-32 h-2 ${theme.accentBg} rounded-full my-6`}></div>
-                                <div className="space-y-6 text-left w-full max-w-4xl mx-auto">
-                                    {slide.content.map((item, idx) => (
-                                        <div key={idx} className={`flex items-start space-x-4 ${fonts.base} ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`}>
-                                            <Icons.CheckCircle className={`${theme.accent} ${fonts.icon} flex-shrink-0 mt-1`} />
-                                            <span>{item}</span>
-                                        </div>
-                                    ))}
+                                <div className="space-y-6 text-left w-full max-w-4xl mx-auto min-h-[100px]">
+                                    {/* Content removed as requested - kept blank */}
                                 </div>
 
                                 <button
                                     onClick={nextSlide}
-                                    className={`mt-8 px-10 py-4 ${theme.buttonBg} ${theme.buttonText} ${fonts.lg} font-bold rounded-full transition-all transform hover:scale-105 flex items-center shadow-lg`}
+                                    className={`mt-4 px-10 py-3 backdrop-blur-md bg-white/10 hover:bg-white/20 border border-white/30 text-white ${fonts.lg} rounded-full transition-all transform hover:scale-105 flex items-center shadow-lg group`}
                                 >
-                                    <Icons.Sprout className={`mr-3 ${fonts.icon}`} /> 開始經營
+                                    <Icons.TrendingUp className={`mr-3 ${fonts.icon} group-hover:text-yellow-400 transition-colors`} /> 開始經營
                                 </button>
 
                                 <div className="flex-grow"></div>
