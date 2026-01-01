@@ -231,8 +231,8 @@
             },
             light: {
                 bg: "bg-transparent", /* Transparent to show body background */
-                containerBg: "bg-white/80 backdrop-blur-md", /* Glassmorphism */
-                cardBg: "bg-white/90",
+                containerBg: "bg-transparent", /* Transparent to show full manor background */
+                cardBg: "bg-white/60 backdrop-blur-sm", /* More transparent cards */
                 cardBorder: "border-gray-200 hover:border-blue-600 shadow-sm hover:shadow-md",
                 text: "text-gray-900",
                 subText: "text-gray-700",
@@ -610,7 +610,7 @@
                         return (
                             <div className="flex flex-col items-center justify-center h-full text-center space-y-4 p-8">
                                 <div className="mb-2">
-                                    <img src="linkedin_logo_v2.png" alt="LinkedIn Logo" className="w-24 h-24 object-contain mx-auto animate-bounce" />
+                                    <LogoAnimation />
                                 </div>
                                 <h1 className={`${fonts.title} font-bold bg-clip-text text-transparent bg-gradient-to-r ${theme.titleGradient} leading-tight`}>
                                     {slide.title}
@@ -637,7 +637,7 @@
 
                                 <div className="flex-grow"></div>
 
-                                <div className={`mt-4 text-sm ${theme.subText} opacity-80`}>{instructor}</div>
+                                <div className={`mt-4 text-xs ${theme.subText} opacity-80`}>{instructor}</div>
                             </div>
                         );
 
